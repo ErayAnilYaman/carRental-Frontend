@@ -1,0 +1,17 @@
+<table class="table table table-striped table-hover" *ngIf="dataLoaded == true">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Renk</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <th>{{customer.customerId}}</th>
+        <th>{{customer.companyName}}</th>
+      </tr>
+    </tbody>
+  </table>
+<div *ngIf="dataLoaded != true" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>

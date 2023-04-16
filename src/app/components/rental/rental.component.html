@@ -1,0 +1,24 @@
+<table class="table table table-striped table-hover" *ngIf="dataLoaded == true">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Marka</th>
+        <th scope="col">Musteri Ismi</th>
+        <th scope="col">Kiralanan Tarih</th>
+        <th scope="col">Kiralama Bitim Tarihi</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rental of rentals">
+        <th>{{rental.rentalId}}</th>
+        <th>{{rental.brandName}}</th>
+        <th>{{rental.userName}}</th>
+        <th>{{rental.rentDate}}</th>
+        <th>{{rental.returnDate}}</th>
+      </tr>
+    </tbody>
+  </table>
+<div *ngIf="dataLoaded != true" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
