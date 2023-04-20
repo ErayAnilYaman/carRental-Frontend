@@ -1,24 +1,34 @@
-<table class="table table table-striped table-hover" *ngIf="dataLoaded == true">
-    <thead class="table-primary">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Marka</th>
-        <th scope="col">Gunluk Fiyat</th>
-        <th scope="col">Renk</th>
-        <th scope="col">Model</th>
+<div class="row mt-4" style="margin-left: 1%">
+  <div
+    *ngFor="let car of cars"
+    class="card mt-2 mr-2"
+    style="width: 18rem; margin-right: 10px"
+  >
+    
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let car of cars">
-        <th>{{car.carId}}</th>
-        <th>{{car.brandName}}</th>
-        <th>{{car.dailyPrice}}</th>
-        <th>{{car.colorName}}</th>
-        <th>{{car.modelYear}}</th>
-      </tr>
-    </tbody>
-  </table>
-<div *ngIf="dataLoaded != true" class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
+    <div class="card-body"   >
+      <h4 class="cart-title">{{ car.brandName + " " + car.modelYear }}</h4>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><i><b>Model Yılı | </b></i>{{ car.modelYear }}</li>
+      <li class="list-group-item"><i><b>Marka | </b></i>{{ car.brandName }}</li>
+      <li class="list-group-item"><i><b>Renk | </b></i>{{ car.colorName }}</li>
+    </ul>
+
+    <div class="card-body">
+      <div class="row">
+
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="setCurrentCarDetail(car)"
+          routerLink="/cars/car-detail/{{setCurrentCarDetail(car)}}"
+        >
+          Teklif Al!!
+        </button>
+
+      </div>
+    </div>
+  </div>
 </div>
