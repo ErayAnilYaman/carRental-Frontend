@@ -1,9 +1,10 @@
-<div (click)="setCurrentColor(currentColor)" class="text-center text-bg-dark p-1" routerLink="/cars" style="font-size: larger;" >
+<div (click)="setCurrentColor(currentColor)" class="text-center text-bg-dark p-1" routerLink="/colors" style="font-size: larger;" >
   <b>Tum Renkler</b>
 </div>
 <ul class="list-group">
   <li *ngFor="let color of colors" 
-  routerLink="/cars/color/{{color.colorId}}"
   (click)="setCurrentColor(color)"
-  [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
+  routerLink="cars/color/{{color.colorId}}"
+  [class]="getCurrentColorClass(color)"
+  >{{color.colorName}}</li>
 </ul>
