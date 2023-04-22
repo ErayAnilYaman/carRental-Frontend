@@ -15,8 +15,8 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   carDetails: CarDetail[]=[];
   carImages: CarImage[]=[];
-  imageOfPath:string;
-  baseUrl="https://localhost:44387/Uploads/Images/"
+  imageOfPath:string
+  baseUrl="https://localhost:44318/uploads/images/"
 
   constructor(private carService: CarService,
     private activatedRoute:ActivatedRoute,
@@ -54,8 +54,11 @@ export class CarComponent implements OnInit {
   };
   getCarImageByCarId(id:number){
     this.carImageService.getCarImagesById(id).subscribe(response=>{
+      
       const imagePath=response.data[2].imagePath;
-      this.imageOfPath = this.baseUrl+imagePath;
+      this.imageOfPath= this.baseUrl+ imagePath;
+
+      
     })
     return this.imageOfPath;
   }

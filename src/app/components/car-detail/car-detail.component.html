@@ -1,11 +1,11 @@
-<div class="row mt-4" style="margin-left: 1%" >
+<div class="row mt-4" style="margin-left: 20%" >
   
     
         <div
           *ngFor="let carDetails of carDetailList"
           class="card mt-2 mr-2"
           style="width: 26rem; margin-right: 10px"
-          routerLink="/cars/carDetails/{{carDetails.id}}"
+          routerLink="/cars/carDetails/{{carDetails.carId}}"
         >
           <img
             *ngIf="carDetails.imagePath"
@@ -18,7 +18,7 @@
       
           <img
             *ngIf="!carDetails.imagePath"
-            [src]="baseUrl+'default-car.jpg'"
+            [src]="baseUrl+'defaultCar.jpg'"
             class="card-img-top"
             style="object-fit: cover"
             width="100"
@@ -46,7 +46,7 @@
               <button
                 type="button"
                 class="btn btn-success"
-                routerLink="/cars/carDetails/{{carDetails.id}}"
+                routerLink="/cars/carDetails/{{carDetails.carId}}"
               >
                Araci Kirala
               </button>

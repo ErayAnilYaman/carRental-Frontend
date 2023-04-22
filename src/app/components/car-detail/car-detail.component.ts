@@ -14,7 +14,9 @@ export class CarDetailComponent implements OnInit {
   carDetailList :CarDetail[] = []
   carImage : CarImage[]=[];
   dataLoaded = false;
-  baseUrl ="https://localhost:44318/api/Uploads/Images"
+  baseUrl ="https://localhost:44318/Uploads/Images/"
+  imageOfPath :string
+
   constructor(private carService:CarService,private carImageService:CarImageService,private activatedRoute:ActivatedRoute){
       
 
@@ -23,19 +25,13 @@ export class CarDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params)=>{
       if (params["id"]) {
         this.getCarDetailsById(params["id"])
-        this.getImageById(params["id"])
       }
       else{
         this.getCars()
       }
     })
   }
-  getImageById(id:number){
-      this.carImageService.getCarImagesById(id).subscribe((response)=>{
-          this.carImage = response.data;
-          this.dataLoaded=true
-      })
-  }
+  
   getCars(){
     this.carService.getCars().subscribe((response)=>{
       this.carDetailList = response.data

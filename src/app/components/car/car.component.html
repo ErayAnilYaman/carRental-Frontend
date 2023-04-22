@@ -15,7 +15,7 @@
 
     <img
       *ngIf="!carDetail.imagePath"
-      [src]="baseUrl+'default-car.jpg'"
+      [src]="baseUrl+'defaultCar.jpg'"
       class="card-img-top"
       style="object-fit: cover"
       width="100"
@@ -27,8 +27,7 @@
     </div>
 
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><i><b>Model Yılı | </b></i>{{ carDetail.modelYear }}</li>
-      <li class="list-group-item"><i><b>Marka | </b></i>{{ carDetail.brandName }}</li>
+      <li class="list-group-item"><i><b>Gunluk Ucreti | </b></i>{{ carDetail.dailyPrice }}</li>
       <li class="list-group-item"><i><b>Renk | </b></i>{{ carDetail.colorName }}</li>
     </ul>
 
@@ -39,9 +38,10 @@
           
           type="button"
           class="btn btn-success"
-          routerLink="/cars/carDetails/{{carDetail.id}}"
+          routerLink="/cars/carDetails/{{carDetail.carId}}"
         >
-        Teklif Al!! {{carDetail.description}}
+        Araci Incele !! 
+        
           
         </button>
         
