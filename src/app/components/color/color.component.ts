@@ -25,9 +25,6 @@ export class ColorComponent implements OnInit {
       this.dataLoaded = true
     })
   }
-  getAllCars(){
-
-  }
   setCurrentColor(color:Color){
     this.currentColor = color
   }
