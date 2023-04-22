@@ -3,7 +3,6 @@
     *ngFor="let carDetail of carDetails"
     class="card mt-2 mr-2"
     style="width: 18rem; margin-right: 10px"
-    routerLink="/cars"
   >
     <img
       *ngIf="carDetail.imagePath"
@@ -37,12 +36,13 @@
       <div class="row" >
         
           <button
+          
           type="button"
           class="btn btn-success"
-          (click)="setCurrentCar(carDetail)" 
-          routerLink="/cars/carDetail/{{carDetail.id}}"
+          routerLink="/cars/carDetails/{{carDetail.id}}"
         >
-          Araç Detayi
+        Teklif Al!! {{carDetail.description}}
+          
         </button>
         
         
@@ -55,64 +55,4 @@
 
 
 
-  <div class="row mt-4" style="margin-left: 1%" >
-  
-    <div class="row mt-1" style="margin-left: 25%" >
-        <div
-          *ngFor="let carDetails of carDetailById"
-          class="card mt-2 mr-2"
-          style="width: 26rem; margin-right: 10px"
-          routerLink="/cars/{{carDetails.id}}"
-        >
-          <img
-            *ngIf="carDetails.imagePath"
-            [src]="baseUrl+carDetails.imagePath"
-            class="card-img-top"
-            style="object-fit: cover"
-            width="100"
-            height="70%"
-          />
-      
-          <img
-            *ngIf="!carDetails.imagePath"
-            [src]="baseUrl+'default-car.jpg'"
-            class="card-img-top"
-            style="object-fit: cover"
-            width="100"
-            height="50%"
-          />
-      
-          <div class="card-body text-center">
-            <h4 class="cart-title">{{ carDetails.brandName + " " + carDetails.modelYear }}</h4>
-          </div>
-      
-          <ul class="list-group list-group-flush text-center">
-            <li class="list-group-item"><i><b>Model Yılı | </b></i>{{ carDetails.modelYear }}</li>
-            <li class="list-group-item"><i><b>Marka | </b></i>{{ carDetails.brandName }}</li>
-            <li class="list-group-item"><i><b>Renk | </b></i>{{ carDetails.colorName }}</li>
-            <li class="list-group-item"><i><b>Açıklama | </b></i>{{ carDetails.description }}</li>
-            <li class="list-group-item"><i><b>Günlük Fiyat:  </b></i>{{ carDetails.dailyPrice + " ₺" }}</li>
-            <li class="list-group-item">
-             <i><b>Aylık %20 İndirimli Fiyat:  </b></i>{{ carDetails.dailyPrice * 30 * 0.8 + " ₺" }}
-            </li>
-          </ul>
-      
-          <div class="card-body">
-            <div class="row">
-      
-              <button
-                type="button"
-                class="btn btn-success"
-              >
-               Aracı Kirala
-              </button>
-      
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
-    </div>
-
-  
+ 
