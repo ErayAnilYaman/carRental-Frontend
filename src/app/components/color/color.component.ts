@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./color.component.css']
 })
 export class ColorComponent implements OnInit {
+  filterText = ""
   currentColor : Color
   dataLoaded = false;
   colors:Color[] = []

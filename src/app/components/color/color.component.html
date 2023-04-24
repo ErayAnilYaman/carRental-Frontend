@@ -1,8 +1,16 @@
-<div (click)="setCurrentColor(currentColor)" class="text-center text-bg-dark p-1" routerLink="/colors" style="font-size: larger;" >
+<div (click)="setCurrentColor(currentColor)" style = "top: 15 px;"  class="text-center text-bg-dark p-1" routerLink="/cars" style="font-size: larger;" >
   <b>Tum Renkler</b>
 </div>
+<div class="mb-3">
+  <label for="filterText" class="form-label"></label>
+  <input  type="text" [(ngModel)] = "filterText" class="form-control" id="filterText"
+   placeholder="Dilediginiz rengi aratip filtreleyebilirsiniz" >
+</div>
+<div *ngIf="filterText" class="alert alert-dark">
+  {{filterText}} aradiniz.
+</div>
 <ul class="list-group">
-  <li *ngFor="let color of colors" 
+  <li *ngFor="let color of colors | filterColorSearch:filterText" 
   (click)="setCurrentColor(color)"
   routerLink="cars/color/{{color.colorId}}"
   [class]="getCurrentColorClass(color)"

@@ -1,8 +1,16 @@
 <div (click)="setCurrentBrand(currentBrand)" class="text-center text-bg-dark p-1" routerLink="/cars" style="font-size: larger;" >
   <b>Tum Markalar</b>
 </div>
+<div class="mb-3">
+  <label for="filterText" class="form-label"></label>
+  <input  type="text" [(ngModel)] = "filterText" class="form-control" id="filterText"
+   placeholder="Dilediginiz markayi aratip filtreleyebilirsiniz" >
+</div>
+<div *ngIf="filterText" class="alert alert-dark">
+  {{filterText}} aradiniz.
+</div>
 <ul class="list-group">
-  <li *ngFor="let brand of brands" 
+  <li *ngFor="let brand of brands | filterBrandSearch:filterText" 
   routerLink="cars/brand/{{brand.brandId}}"
   (click)="setCurrentBrand(brand)"
   [class]="getCurrentBrandClass(brand)"

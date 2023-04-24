@@ -12,6 +12,7 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car.component.css'],
 })
 export class CarComponent implements OnInit {
+  filterText=""
   cars: Car[] = [];
   carDetails: CarDetail[]=[];
   carImages: CarImage[]=[];

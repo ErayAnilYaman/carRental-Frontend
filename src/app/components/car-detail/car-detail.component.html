@@ -34,19 +34,23 @@
             <li class="list-group-item"><i><b>Marka | </b></i>{{ carDetails.brandName }}</li>
             <li class="list-group-item"><i><b>Renk | </b></i>{{ carDetails.colorName }}</li>
             <li class="list-group-item"><i><b>Açıklama | </b></i>{{ carDetails.description }}</li>
-            <li class="list-group-item"><i><b>Günlük Fiyat:  </b></i>{{ carDetails.dailyPrice + " ₺" }}</li>
+            <li class="list-group-item"><i><b>Günlük Fiyat:  </b></i>{{ carDetails.dailyPrice | currency   }} </li>
+            <li class="list-group-item"><i><b>Kdv'li Fiyat:  </b></i>{{carDetails.dailyPrice | vatAdded:18 | currency }} </li>
             <li class="list-group-item">
-             <i><b>Aylık %20 İndirimli Fiyat:  </b></i>{{ carDetails.dailyPrice * 30 * 0.8 + " ₺" }}
+             <i><b>Aylık %20 İndirimli Fiyat:  </b></i>{{ carDetails.dailyPrice * (8/10)}}
             </li>
           </ul>
-      
+          
+          
+          
           <div class="card-body">
             <div class="row" >
-                
+              
               <button
                 type="button"
                 class="btn btn-success"
-                routerLink="/cars/carDetails/{{carDetails.carId}}"
+                (click) = "addToCart(carDetails)"
+                routerLink ="/payment/{{carDetails.carId}}"
               >
                Araci Kirala
               </button>

@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./brand.component.css']
 })
 export class BrandComponent implements OnInit{
+  filterText = ""
   dataLoaded = false
   brands:Brand[] = []
   currentBrand:Brand

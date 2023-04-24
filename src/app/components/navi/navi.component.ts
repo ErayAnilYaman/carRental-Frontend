@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class NaviComponent {
   title:string = "RentACar"
   brand:string = "TouchRent"
+  filterText = ""
 }

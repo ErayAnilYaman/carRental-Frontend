@@ -12,7 +12,16 @@ import { RentalComponent } from './components/rental/rental.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { from } from 'rxjs';
-
+import { VatAddedPipe } from './pipes/vat-added.pipe';
+import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
+import { NgModel } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
+import { FilterCarSearchPipe } from './pipes/filter-car-search.pipe';
+import { FilterBrandSearchPipe } from './pipes/filter-brand-search.pipe';
+import { FilterColorSearchPipe } from './pipes/filter-color-search.pipe'
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { PaymentComponent } from './components/payment/payment.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,11 +32,24 @@ import { from } from 'rxjs';
     RentalComponent,
     NaviComponent,
     CarDetailComponent,
+    VatAddedPipe,
+    CartSummaryComponent,
+    FilterCarSearchPipe,
+    FilterBrandSearchPipe,
+    FilterColorSearchPipe,
+    PaymentComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass:"toast-bottom-right",
+      timeOut : 3000
+    }),
   ],
   
   providers: [],

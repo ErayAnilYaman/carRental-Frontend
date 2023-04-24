@@ -1,6 +1,14 @@
+<div class="mb-3">
+  <label for="filterText" class="form-label"></label>
+  <input  type="text" [(ngModel)] = "filterText" class="form-control" id="filterText"
+   placeholder="Dilediginiz urunu aratabilirsiniz" >
+</div>
+<div *ngIf="filterText" class="alert alert-dark">
+  {{filterText}} aradiniz.
+</div>
 <div class="row mt-4" style="margin-left: 1%">
   <div
-    *ngFor="let carDetail of carDetails"
+    *ngFor="let carDetail of carDetails | filterCarSearch:filterText"
     class="card mt-2 mr-2"
     style="width: 18rem; margin-right: 10px"
   >
@@ -23,12 +31,14 @@
     />
 
     <div class="card-body">
-      <h4 class="cart-title">{{ carDetail.brandName + " " + carDetail.modelYear}}</h4>
+      <h4 class="cart-title">{{carDetail.description+ " " + carDetail.modelYear}}</h4>
     </div>
 
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><i><b>Gunluk Ucreti | </b></i>{{ carDetail.dailyPrice }}</li>
       <li class="list-group-item"><i><b>Renk | </b></i>{{ carDetail.colorName }}</li>
+      <li class="list-group-item"><i><b>Marka | </b></i>{{ carDetail.brandName }}</li>
+
     </ul>
 
     <div class="card-body">
