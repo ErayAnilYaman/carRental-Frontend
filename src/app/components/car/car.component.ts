@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
@@ -21,7 +22,8 @@ export class CarComponent implements OnInit {
 
   constructor(private carService: CarService,
     private activatedRoute:ActivatedRoute,
-    private carImageService:CarImageService) {}
+    private carImageService:CarImageService,
+    private toastrService:ToastrService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -46,21 +48,18 @@ export class CarComponent implements OnInit {
   getCarsByBrand(brandId:number){
     this.carService.getCarsByBrandId(brandId).subscribe(response=>{
       this.carDetails=response.data
+      let filteredCar = this.carDetails.find(c=>c.brandId === brandId).brandName;
+      this.toastrService.success("Arac filtrelendirilmesi yapildi!!","Filtrelenen arac markasi :" + filteredCar)
     })
   };
   getCarsByColor(ColorId:number){
     this.carService.getCarsByColorId(ColorId).subscribe(response=>{
       this.carDetails=response.data
+      let filteredCar = this.carDetails.find(c=>c.colorId === ColorId).colorName;
+      this.toastrService.success("Arac filtrelendirilmesi yapildi!!","Filtrelenen arac rengi :" + filteredCar)
+
     })
   };
-  getCarImageByCarId(id:number){
-    this.carImageService.getCarImagesById(id).subscribe(response=>{
-      
-      const imagePath=response.data[2].imagePath;
-      this.imageOfPath= this.baseUrl+ imagePath;
-
-      
-    })
-    return this.imageOfPath;
-  }
+  
+  
 }

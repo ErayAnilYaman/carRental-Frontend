@@ -1,25 +1,40 @@
-<table class="table table table-striped table-hover" *ngIf="dataLoaded == true">
-    <thead class="table-primary">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Marka</th>
-        <th scope="col">Musteri Ismi</th>
-        <th scope="col">Kiralanan Tarih</th>
-        <th scope="col">Kiralama Bitim Tarihi</th>
+<div class="row mt-4" style="margin-left: 15%" 
+>
+<div *ngFor="let carDetail of carsDetail" style="width: 36rem;">
+  <img
+    
+  *ngIf="carDetail.imagePath"
+  [src]="baseUrl+carDetail.imagePath"
+  class="card-img-top"
+  style="object-fit: cover"
+  width="100"
+  height="50%"
+/>
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let rental of rentals">
-        <th>{{rental.rentalId}}</th>
-        <th>{{rental.brandName}}</th>
-        <th>{{rental.userName}}</th>
-        <th>{{rental.rentDate}}</th>
-        <th>{{rental.returnDate}}</th>
-      </tr>
-    </tbody>
-  </table>
-<div *ngIf="dataLoaded != true" class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
+<img
+  *ngIf="!carDetail.imagePath"
+  [src]="baseUrl+'defaultCar.jpg'"
+  class="card-img-top"
+  style="object-fit: cover"
+  width="100"
+  height="50%"
+/>
+  <div class="card-body row-cols-1">
+    <h6 class="card-title">{{carDetail.brandName}}</h6>
+    <p class="card-text">{{carDetail.description}}</p>
+    <p class="card-text">Fiyatı {{ price |vatAdded:18|currency:"₺"}}</p>
+    <div class="form-group">
+      <label for="pickupDate">Kiralama Tarihi:</label>
+      <input type="Date" class="form-control" id="pickupDate" [(ngModel)]="picksUpDate">
+    </div>
+    <div class="form-group">
+      <label for="returnDate">Teslim Tarihi:</label>
+      <input type="Date" class="form-control" id="returnDate" [(ngModel)]="returnsDate" (ngModelChange)="checkReturnDate()">
+      <br>
+      
+    </div>
+  </div>
+  
+  <button type="submit" (click)="checkValuesAndGetPay(carDetail.carId)"   class="btn btn-primary">Ödemeyi tamamla</button>
 </div>
-
+</div>

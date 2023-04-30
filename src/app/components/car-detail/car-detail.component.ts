@@ -17,13 +17,12 @@ import { Rental } from 'src/app/models/rental';
 })
 export class CarDetailComponent implements OnInit {
   carDetailList :CarDetail[] = []
-  carImage : CarImage[]=[];
   rentalList : Rental[] = [];
   rentDateElement : Date
   returnDateElement :Date
+  baseUrl = "https://localhost:44318/Uploads/Images/"
 
   dataLoaded = false;
-  baseUrl ="https://localhost:44318/Uploads/Images/"
   imageOfPath :string
 
   constructor(private carService:CarService,private carImageService:CarImageService, private rentalService:RentalService,
@@ -35,18 +34,9 @@ export class CarDetailComponent implements OnInit {
       if (params["id"]) {
         this.getCarDetailsById(params["id"])
       }
-      else{
-        this.getCars()
-      }
     })
   }
   
-  getCars(){
-    this.carService.getCars().subscribe((response)=>{
-      this.carDetailList = response.data
-      this.dataLoaded = true;
-    })
-  }
   getCarDetailsById(id:number){
     this.carService.getCarsById(id).subscribe((response)=>{
       this.carDetailList = response.data;
@@ -69,4 +59,5 @@ export class CarDetailComponent implements OnInit {
     });
     this.toastrService.success("Kiralanan urunler listelendi")
   }
+  
 }

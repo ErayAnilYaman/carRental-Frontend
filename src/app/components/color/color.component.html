@@ -1,18 +1,14 @@
-<div (click)="setCurrentColor(currentColor)" style = "top: 15 px;"  class="text-center text-bg-dark p-1" routerLink="/cars" style="font-size: larger;" >
-  <b>Tum Renkler</b>
+<div *ngIf="dataLoaded==false" class="spinner-border text-secondary" role="status">
+  <span class="visually-hidden">Loading...</span>
 </div>
 <div class="mb-3">
-  <label for="filterText" class="form-label"></label>
-  <input  type="text" [(ngModel)] = "filterText" class="form-control" id="filterText"
-   placeholder="Dilediginiz rengi aratip filtreleyebilirsiniz" >
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-dark " routerLink="cars">Renkler</li>
+  </ul>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="colorSearch" placeholder="Renk giriniz">
 </div>
-<div *ngIf="filterText" class="alert alert-dark">
-  {{filterText}} aradiniz.
-</div>
-<ul class="list-group">
-  <li *ngFor="let color of colors | filterColorSearch:filterText" 
-  (click)="setCurrentColor(color)"
-  routerLink="cars/color/{{color.colorId}}"
-  [class]="getCurrentColorClass(color)"
-  >{{color.colorName}}</li>
-</ul>
+<select class="form-select" *ngIf="dataLoaded==true" [(ngModel)]="currentColor" 
+        routerLink="cars/color/{{currentColor}}" aria-label="Default select example">
+  <option  [ngValue]="null" selected>Renk seçiniz</option>
+  <option *ngFor="let color of colors|filterColorSearch:filterText" [value]="color.colorId">{{color.colorName}}</option>
+</select>

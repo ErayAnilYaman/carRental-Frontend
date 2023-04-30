@@ -21,7 +21,7 @@ import { FilterBrandSearchPipe } from './pipes/filter-brand-search.pipe';
 import { FilterColorSearchPipe } from './pipes/filter-color-search.pipe'
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { PaymentComponent } from './components/payment/payment.component'
+import { PaymentComponent } from './components/payment/payment.component';
 @NgModule({
   declarations: [
     AppComponent,

@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ColorComponent implements OnInit {
   filterText = ""
-  currentColor : Color
+  currentColor:Color | null = null;
   dataLoaded = false;
   colors:Color[] = []
   constructor(private colorService:ColorService){
@@ -26,13 +26,14 @@ export class ColorComponent implements OnInit {
       this.dataLoaded = true
     })
   }
-  setCurrentColor(color:Color){
-    this.currentColor = color
-  }
-  getCurrentColorClass(color:Color){
-    if(color == this.currentColor){
-      return "list-group-item active"
-    }
-    return "list-group-item"
-  }
+  // }
+  // setCurrentColor(color:Color){
+  //   this.currentColor = color
+  // }
+  // getCurrentColorClass(color:Color){
+  //   if(color == this.currentColor){
+  //     return "list-group-item active"
+  //   }
+  //   return "list-group-item"
+  // }
 }

@@ -1,26 +1,53 @@
-<nav class="navbar navbar-dark bg-dark ">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Yaman Otomotiv</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" routerLink="">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <app-cart-summary></app-cart-summary>
-        </ul>
-        
-      </div>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="">
+        <img
+          src="./logo/yamanRent.jpg"
+          height="15"
+          alt="Rent Car Fast"
+          loading="lazy"
+        />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Projects</a>
+        </li>
+      </ul>
+      <!-- Left links -->
     </div>
-  </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    
+      <!-- Avatar -->
+      <app-cart-summary></app-cart-summary>
+    </div>
+    <!-- Right elements -->
+  <!-- Container wrapper -->
 </nav>
+<!-- Navbar -->

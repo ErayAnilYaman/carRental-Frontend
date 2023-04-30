@@ -1,18 +1,25 @@
+<form>
+  <div class="mb-3">
+    <label for="cardNumber" class="form-label">Kart numarası</label>
+    <input type="text" class="form-control" id="cardNumber"  maxlength="16"
+           [(ngModel)]="cardNumber" name="cardNumber" >
+  </div>
+  <div class="mb-3">
+    <label for="cardOwnerName" class="form-label">Kart sahibi</label>
+    <input type="text" class="form-control" id="cardOwnerName" [(ngModel)]="cardOwnerName"
+            name="cardOwnerName" >
+  </div>
+  <div class="mb-3">
+    <label for="date" class="form-label">Tarih (Ay/Yıl)</label>
+    <input type="text" class="form-control" id="date" name="date"  
+           maxlength="4" >
+  </div>
+  <div class="mb-3">
+    <label for="cvc" class="form-label">CVC</label>
+    <input type="text"  class="form-control" id="cvc" maxlength="3" 
+           name="cardCvc"
+           >
+  </div>
 
-<ul *ngFor="let rental of rentalList">
-    <li class="">
-  
-    </li>
-    <li class="list-group-item">
-      <div class="input-group mb-3">
-        <label  class="input-group-date" for="inputGroupDate01"><i><b>Rent Date  </b></i> </label>
-        <input type="date" class="form-control" id="inputGroupDate01">
-      </div>
-    </li>
-    <li class="list-group-item">
-      <div class="input-group mb-3">
-        <label class="input-group-date" for="inputGroupDate01"> <i> <b>Return Date</b> </i> </label>
-        <input type="date" class="form-control" id="inputGroupDate01">
-      </div>
-    </li>
-  </ul>
+  <button type="submit" (click)="submit()" class="btn btn-primary">Ödemeyi tamamla</button>
+</form>

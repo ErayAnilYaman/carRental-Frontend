@@ -29,4 +29,5 @@ export class CarService {
     return this.httpClient.get<ListResponseModel<CarDetail>>(getCarDetail)
   }
   
+  
 }

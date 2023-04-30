@@ -1,65 +1,62 @@
-<div class="row mt-4" style="margin-left: 20%" >
-  
+<div class="row mt-4" style="margin-left: 35%" 
+>
+  <div
+    *ngFor="let carDetail of carDetailList "
+    class="card mt-2 mr-2"
+    style="width: 18rem; margin-right: 10px"
     
-        <div
-          *ngFor="let carDetails of carDetailList"
-          class="card mt-2 mr-2"
-          style="width: 26rem; margin-right: 10px"
-          routerLink="/cars/carDetails/{{carDetails.carId}}"
-        >
-          <img
-            *ngIf="carDetails.imagePath"
-            [src]="baseUrl+carDetails.imagePath"
-            class="card-img-top"
-            style="object-fit: cover"
-            width="100"
-            height="70%"
-          />
-      
-          <img
-            *ngIf="!carDetails.imagePath"
-            [src]="baseUrl+'defaultCar.jpg'"
-            class="card-img-top"
-            style="object-fit: cover"
-            width="100"
-            height="50%"
-          />
-      
-          <div class="card-body text-center">
-            <h4 class="cart-title">{{ carDetails.brandName + " " + carDetails.modelYear }}</h4>
-          </div>
-      
-          <ul class="list-group list-group-flush text-center">
-            <li class="list-group-item"><i><b>Model Yılı | </b></i>{{ carDetails.modelYear }}</li>
-            <li class="list-group-item"><i><b>Marka | </b></i>{{ carDetails.brandName }}</li>
-            <li class="list-group-item"><i><b>Renk | </b></i>{{ carDetails.colorName }}</li>
-            <li class="list-group-item"><i><b>Açıklama | </b></i>{{ carDetails.description }}</li>
-            <li class="list-group-item"><i><b>Günlük Fiyat:  </b></i>{{ carDetails.dailyPrice | currency   }} </li>
-            <li class="list-group-item"><i><b>Kdv'li Fiyat:  </b></i>{{carDetails.dailyPrice | vatAdded:18 | currency }} </li>
-            <li class="list-group-item">
-             <i><b>Aylık %20 İndirimli Fiyat:  </b></i>{{ carDetails.dailyPrice * (8/10)}}
-            </li>
-          </ul>
-          
-          
-          
-          <div class="card-body">
-            <div class="row" >
-              
-              <button
-                type="button"
-                class="btn btn-success"
-                (click) = "addToCart(carDetails)"
-                routerLink ="/payment/{{carDetails.carId}}"
-              >
-               Araci Kirala
-              </button>
-      
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
+  >
+  <img
+    
+  *ngIf="carDetail.imagePath"
+  [src]="baseUrl+carDetail.imagePath"
+  class="card-img-top"
+  style="object-fit: cover"
+  width="100"
+  height="50%"
+/>
 
-  
+<img
+  *ngIf="!carDetail.imagePath"
+  [src]="baseUrl+'defaultCar.jpg'"
+  class="card-img-top"
+  style="object-fit: cover"
+  width="100"
+  height="50%"
+/>
+
+    <div class="card-body">
+      <h4 class="cart-title">{{carDetail.description+ " " + carDetail.modelYear}}</h4>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><i><b>Gunluk Ucreti | </b></i>{{ carDetail.dailyPrice }}</li>
+      <li class="list-group-item"><i><b>Renk | </b></i>{{ carDetail.colorName }}</li>
+      <li class="list-group-item"><i><b>Marka | </b></i>{{ carDetail.brandName }}</li>
+      <li class="list-group-item"><i><b>Fiyat | </b></i>{{ carDetail.dailyPrice | currency:"₺"}}</li>
+      <li class="list-group-item"><i><b>Kdv'Li Fiyat | </b></i>{{ carDetail.dailyPrice  | vatAdded:18 | currency:"₺"}}</li>
+
+
+    </ul>
+
+    <div class="card-body">
+      <div class="row" >
+        
+          <button
+          
+          type="button"
+          class="btn btn-success"
+          routerLink="/rental/{{carDetail.carId}}"
+        >
+          Araci Kirala !! 
+        
+          
+        </button>
+        
+        
+
+      </div>
+    </div>
+    
+
+  </div>

@@ -6,29 +6,30 @@
 <div *ngIf="filterText" class="alert alert-dark">
   {{filterText}} aradiniz.
 </div>
-<div class="row mt-4" style="margin-left: 1%">
+<div class="row mt-4" style="margin-left: 1%" >
   <div
     *ngFor="let carDetail of carDetails | filterCarSearch:filterText"
     class="card mt-2 mr-2"
     style="width: 18rem; margin-right: 10px"
   >
-    <img
-      *ngIf="carDetail.imagePath"
-      [src]="baseUrl+carDetail.imagePath"
-      class="card-img-top"
-      style="object-fit: cover"
-      width="100"
-      height="50%"
-    />
+  <img
+    
+  *ngIf="carDetail.imagePath"
+  [src]="baseUrl+carDetail.imagePath"
+  class="card-img-top"
+  style="object-fit: cover"
+  width="100"
+  height="50%"
+/>
 
-    <img
-      *ngIf="!carDetail.imagePath"
-      [src]="baseUrl+'defaultCar.jpg'"
-      class="card-img-top"
-      style="object-fit: cover"
-      width="100"
-      height="50%"
-    />
+<img
+  *ngIf="!carDetail.imagePath"
+  [src]="baseUrl+'defaultCar.jpg'"
+  class="card-img-top"
+  style="object-fit: cover"
+  width="100"
+  height="50%"
+/>
 
     <div class="card-body">
       <h4 class="cart-title">{{carDetail.description+ " " + carDetail.modelYear}}</h4>
@@ -60,8 +61,8 @@
       </div>
     </div>
     
+
   </div>
-</div>
 
 
 

@@ -1,18 +1,14 @@
-<div (click)="setCurrentBrand(currentBrand)" class="text-center text-bg-dark p-1" routerLink="/cars" style="font-size: larger;" >
-  <b>Tum Markalar</b>
+<div *ngIf="dataLoaded==false" class="spinner-border text-secondary" role="status">
+  <span class="visually-hidden">Loading...</span>
 </div>
 <div class="mb-3">
-  <label for="filterText" class="form-label"></label>
-  <input  type="text" [(ngModel)] = "filterText" class="form-control" id="filterText"
-   placeholder="Dilediginiz markayi aratip filtreleyebilirsiniz" >
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-dark " routerLink="cars">Markalar</li>
+  </ul>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="colorSearch" placeholder="Marka adı giriniz">
 </div>
-<div *ngIf="filterText" class="alert alert-dark">
-  {{filterText}} aradiniz.
-</div>
-<ul class="list-group">
-  <li *ngFor="let brand of brands | filterBrandSearch:filterText" 
-  routerLink="cars/brand/{{brand.brandId}}"
-  (click)="setCurrentBrand(brand)"
-  [class]="getCurrentBrandClass(brand)"
-  >{{brand.brandName}}</li>
-</ul>
+<select class="form-select" *ngIf="dataLoaded==true" [(ngModel)]="currentBrand" 
+        routerLink="cars/brand/{{currentBrand}}" aria-label="Default select example">
+  <option [ngValue]="null" selected>Marka seçiniz</option>
+  <option *ngFor="let brand of brands|filterBrandSearch:filterText" [value]="brand.brandId">{{brand.brandName}}</option>
+</select>
