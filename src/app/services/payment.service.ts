@@ -1,8 +1,8 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { ListResponseModel } from '../models/listResponseModel';
-import { Pay } from '../models/pay';
 import { Observable } from 'rxjs';
+import { Pay } from '../models/pay';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { CartItemService } from 'src/app/services/cart-item.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from 'src/app/services/car.service';
 import { Component, OnInit } from '@angular/core';
 import { CarDetail } from 'src/app/models/carDetail';
@@ -26,8 +26,8 @@ export class CarDetailComponent implements OnInit {
   imageOfPath :string
 
   constructor(private carService:CarService,private carImageService:CarImageService, private rentalService:RentalService,
-    private activatedRoute:ActivatedRoute , private toastrService:ToastrService,private cartItemService:CartItemService){
-      
+    private activatedRoute:ActivatedRoute , private toastrService:ToastrService,private cartItemService:CartItemService,
+    private router:Router){
   }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params)=>{
@@ -38,7 +38,7 @@ export class CarDetailComponent implements OnInit {
   }
   
   getCarDetailsById(id:number){
-    this.carService.getCarsById(id).subscribe((response)=>{
+    this.carService.getCarDetailsById(id).subscribe((response)=>{
       this.carDetailList = response.data;
       this.dataLoaded = true;
     })
@@ -59,5 +59,9 @@ export class CarDetailComponent implements OnInit {
     });
     this.toastrService.success("Kiralanan urunler listelendi")
   }
+  updatePath(){
+    this.router.navigateByUrl("cars/update");
+  }
+
   
 }

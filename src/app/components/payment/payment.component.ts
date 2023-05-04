@@ -52,7 +52,7 @@ export class PaymentComponent implements OnInit {
   }
   
   setPrice(carId:number){
-    this.carService.getCarsById(carId).subscribe((response)=>{
+    this.carService.getCarDetailsById(carId).subscribe((response)=>{
       this.dailyPrice = response.data.find(d=>d.carId === carId).dailyPrice;
       this.dataLoaded = true;
     })

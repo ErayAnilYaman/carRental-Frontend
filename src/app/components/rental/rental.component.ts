@@ -41,7 +41,7 @@ export class RentalComponent implements OnInit {
     this.activatedRoute.params.subscribe((params)=>{
       if (params["carId"]) {
         this.getRentalsByCarId(params["carId"])
-        this.getCarsByCarId(params["carId"])
+        this.getCarDetailsByCarId(params["carId"])
         this.getUserByCarId(params["carId"])
       }
       else{
@@ -63,8 +63,8 @@ export class RentalComponent implements OnInit {
       this.dataLoaded = true;
     })
   }
-  getCarsByCarId(id:number){
-    this.carService.getCarsById(id).subscribe((response)=>{
+  getCarDetailsByCarId(id:number){
+    this.carService.getCarDetailsById(id).subscribe((response)=>{
       this.carsDetail = response.data
       this.dataLoaded = true;
 

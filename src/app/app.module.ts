@@ -14,14 +14,16 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { from } from 'rxjs';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
-import { NgModel } from '@angular/forms';
-import {FormsModule} from '@angular/forms';
+import { NgModel  } from '@angular/forms';
+import {FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { FilterCarSearchPipe } from './pipes/filter-car-search.pipe';
 import { FilterBrandSearchPipe } from './pipes/filter-brand-search.pipe';
 import { FilterColorSearchPipe } from './pipes/filter-color-search.pipe'
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PaymentComponent } from './components/payment/payment.component';
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { CarUpdateComponent } from './components/car-update/car-update.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     FilterBrandSearchPipe,
     FilterColorSearchPipe,
     PaymentComponent,
+    CarAddComponent,
+    CarUpdateComponent,
     
   ],
   imports: [
@@ -45,6 +49,7 @@ import { PaymentComponent } from './components/payment/payment.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right",
