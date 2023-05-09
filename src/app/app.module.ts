@@ -29,6 +29,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BrandAddComponent } from './components/add/brand-add/brand-add.component';
 import { BrandUpdateComponent } from './components/update/brand-update/brand-update.component';
+import { CarImageAddComponent } from './components/add/car-image-add/car-image-add.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { BrandUpdateComponent } from './components/update/brand-update/brand-upd
     RegisterComponent,
     BrandAddComponent,
     BrandUpdateComponent,
+    CarImageAddComponent,
     
     
   ],
