@@ -8,8 +8,13 @@ import { RentalComponent } from './components/rental/rental.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { PaymentComponent } from './components/payment/payment.component';
-import { CarAddComponent } from './components/car-add/car-add.component';
-import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { CarAddComponent } from './components/add/car-add/car-add.component';
+import { CarUpdateComponent } from './components/update/car-update/car-update.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginGuard } from './guards/login.guard';
+import { BrandAddComponent } from './components/add/brand-add/brand-add.component';
+import { BrandUpdateComponent } from './components/update/brand-update/brand-update.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -24,8 +29,12 @@ const routes: Routes = [
   {path:"cars/carDetails",component:CarDetailComponent},
   {path:"rental/:carId",component:RentalComponent},
   {path:"payment/:carId",component:PaymentComponent},
-  {path:"cars/add",component:CarAddComponent},
-  {path:"cars/update",component:CarUpdateComponent},
+  {path:"cars/add",component:CarAddComponent,canActivate:[LoginGuard]},
+  {path:"brands/add",component:BrandAddComponent,canActivate:[LoginGuard]},
+  {path:"cars/update",component:CarUpdateComponent,canActivate:[LoginGuard]},
+  {path:"brands/update",component:BrandUpdateComponent,canActivate:[LoginGuard]},
+  {path:"login",component:LoginComponent},
+  {path:"register",component:RegisterComponent},
 ];
 
 @NgModule({

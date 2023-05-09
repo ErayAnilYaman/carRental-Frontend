@@ -1,4 +1,4 @@
-import { Car } from './../../models/car';
+import { Car } from '../../../models/car';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
@@ -29,8 +29,8 @@ export class CarUpdateComponent implements OnInit {
   carList: Car[] = [];
   carUpdateForm: FormGroup;
   selectedCar: Car;
-  colors :Color[] = [];
-  brands : Brand[]=[];
+  colors : Color[] = [];
+  brands : Brand[] = [];
   ngOnInit(): void {
     
     this.listCars();
@@ -79,7 +79,7 @@ export class CarUpdateComponent implements OnInit {
     this.updateCreateForm();
   }
 
-  updateCar() {
+  update() {
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
       this.carService.update(carModel).subscribe(
@@ -90,19 +90,9 @@ export class CarUpdateComponent implements OnInit {
           }, 2000);
         },
         (responseError) => {
-          if (responseError.error.ValidationErrors > 0) {
-            for (
-              let i = 0;
-              i < responseError.error.ValidationErrors.length;
-              i++
-            ) {
-              this.toastrService.error(
-                responseError.error.ValidationErrors[i].ErrorMessage,
-                'Doğrulama Hatası'
-              );
-            }
+          console.log(responseError);
           }
-        }
+        
       );
     } else {
       this.toastrService.warning(

@@ -8,7 +8,7 @@
   <input type="text" [(ngModel)]="filterText" class="form-control" id="colorSearch" placeholder="Marka adı giriniz">
 </div>
 <select class="form-select" *ngIf="dataLoaded==true" [(ngModel)]="currentBrand" 
-        routerLink="cars/brand/{{currentBrand}}" aria-label="Default select example">
+        routerLink="cars/brand/{{currentBrand}}"  aria-label="Default select example">
   <option [ngValue]="null" selected>Marka seçiniz</option>
   <option *ngFor="let brand of brands|filterBrandSearch:filterText" [value]="brand.brandId">{{brand.brandName}}</option>
 </select>

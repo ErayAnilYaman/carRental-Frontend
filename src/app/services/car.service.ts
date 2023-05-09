@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CarDetail } from '../models/carDetail';
 import ResponseModel from '../models/ResponseModel';
-import { CarAddComponent } from '../components/car-add/car-add.component';
+import { CarAddComponent } from '../components/add/car-add/car-add.component';
 import { SingleResponseModel } from '../models/singleResponseModel';
 @Injectable({
   providedIn: 'root'
