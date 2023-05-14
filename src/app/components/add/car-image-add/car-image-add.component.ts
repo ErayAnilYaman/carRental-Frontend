@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -9,16 +10,27 @@ import { CarImageService } from 'src/app/services/car-image.service';
   styleUrls: ['./car-image-add.component.css']
 })
 export class CarImageAddComponent implements OnInit {
-  constructor(private formBuilder:FormBuilder,private toastr:ToastrService,private imageService:CarImageService){
+  constructor(private formBuilder:FormBuilder,private toastr:ToastrService,private imageService:CarImageService,
+    private activatedRoute:ActivatedRoute,private router:Router){
 
   }
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params)=>{
+      if (params["carId"]) {
+        this.createImageForm(params["carId"]);
+      }
+      else{
+        this.router.navigate(["cars"])
+        this.toastr.error("404 not found")
+      }
+    })
     
   }
+  carId:number;
   imageForm:FormGroup
-  createImageForm(){
+  createImageForm(id:number){
     this.imageForm = this.formBuilder.group({
-      carId:['',Validators.required],
+      carId: id,
       imagePath:['',Validators.required],
     })
   }
@@ -31,7 +43,11 @@ export class CarImageAddComponent implements OnInit {
         console.log(responseError);
       })
     }
+    else{
+      this.toastr.error("Lutfen resmi yukleyiniz!!");
+    }
   }
+
 
 
 }

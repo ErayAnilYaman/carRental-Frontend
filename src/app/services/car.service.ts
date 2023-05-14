@@ -52,5 +52,9 @@ export class CarService {
     return this.httpClient.post<ResponseModel>(deletePath,car);
 
   }
+  deleteById(id:number):Observable<ResponseModel>{
+    let deletePath = this.apiUrl + "/deletebyid?id=" + id;
+    return this.httpClient.post<ResponseModel>(deletePath,id);
+  }
     
 }

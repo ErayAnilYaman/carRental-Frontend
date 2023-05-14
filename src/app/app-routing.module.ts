@@ -15,6 +15,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginGuard } from './guards/login.guard';
 import { BrandAddComponent } from './components/add/brand-add/brand-add.component';
 import { BrandUpdateComponent } from './components/update/brand-update/brand-update.component';
+import { CarImageAddComponent } from './components/add/car-image-add/car-image-add.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path:"brands/update",component:BrandUpdateComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
+  {path:"carimages/add",component:CarImageAddComponent,canActivate:[LoginGuard]},
 ];
 
 @NgModule({

@@ -16,5 +16,9 @@ export class UserService {
     let getUserByCarIdPath = this.apiUrl + "getuserbycarid?id=" + carId
     return this.httpClient.get<ListResponseModel<User>>(getUserByCarIdPath);
   }
+  getUserByMail(mail:string):Observable<ListResponseModel<User>>{
+    let getUserPath = this.apiUrl + "getuserbymail?mail=" + mail;
+    return this.httpClient.get<ListResponseModel<User>>(getUserPath);
+  }
 
 }

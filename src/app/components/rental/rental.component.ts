@@ -103,7 +103,8 @@ export class RentalComponent implements OnInit {
   }
   
   getCheckRental(carId: number)  {
-    this.rentals.map(value => {
+    if (this.rentals.values()) {
+      this.rentals.map(value => {
         const diff = this.calculateDayDiffrence(value.returnDate.toString().substring(0, value.returnDate.toString().length - 9),this.picksUpDate)
         if (value.returnDate == null || diff > 0) {
           this.toastrService.error("Bu araç şuan kiralamada", "HATA")
@@ -113,8 +114,13 @@ export class RentalComponent implements OnInit {
           this.router.navigateByUrl('/payment/' + carId);
           
         }
-      }
-    )
+      })
+    }
+    else{
+      this.toastrService.warning("Formu doldurunuz!");
+    }
+    
+    
     
 
   }

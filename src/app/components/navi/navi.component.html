@@ -27,16 +27,24 @@
         />
       </a>
       <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!result">
         <li class="nav-item">
-          <a class="nav-link" href="">Dashboard</a>
+          <a class="nav-link" href="/register" (click)="directRegister()">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">Team</a>
+          <a class="nav-link" href="/login" (click)="directLogin()">Login</a>
         </li>
+        
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="result">
         <li class="nav-item">
-          <a class="nav-link" href="">Projects</a>
+          <a class="nav-link" href="">Hello {{userName}}</a>
         </li>
+        <li>
+          <a href="" type="button" class= "btn btn-danger" (click)="logOut()">Cikis Yap</a>
+        </li>
+        
+        
       </ul>
       <!-- Left links -->
     </div>

@@ -25,6 +25,7 @@ export class CarUpdateComponent implements OnInit {
     private activatedRoute:ActivatedRoute,
     private colorService:ColorService,
     private brandService:BrandService,
+    private window:Window
   ) {}
   carList: Car[] = [];
   carUpdateForm: FormGroup;
@@ -32,7 +33,6 @@ export class CarUpdateComponent implements OnInit {
   colors : Color[] = [];
   brands : Brand[] = [];
   ngOnInit(): void {
-    
     this.listCars();
     this.getBrands();
     this.getColors();
@@ -61,6 +61,14 @@ export class CarUpdateComponent implements OnInit {
         window.location.reload();
       }, 2000);
     });
+  }
+  deleteById(car:Car){
+    this.carService.deleteById(car.id).subscribe((response)=>{
+      this.toastrService.error("Arac Silindi!!",car.description)
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    })
   }
 
   updateCreateForm() {

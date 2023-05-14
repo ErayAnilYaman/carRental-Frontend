@@ -7,6 +7,8 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 import { Token } from '@angular/compiler';
 import TokenModel from '../models/tokenModel';
 import { UserToLogin } from '../models/userToLogin';
+import { User } from '../models/user';
+import ResponseModel from '../models/ResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +30,9 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+  logOut(){
+    localStorage.removeItem("Authorization");
+    localStorage.removeItem("userName");
   }
 }

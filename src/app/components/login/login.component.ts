@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit{
   constructor(private authService:AuthService,private formBuilder:FormBuilder
-    ,private toastr:ToastrService,private router:Router){
+    ,private toastr:ToastrService,private router:Router,private userService:UserService){
 
   }
   ngOnInit(): void {
@@ -32,9 +33,13 @@ export class LoginComponent implements OnInit{
     if (this.loginFormModel.valid) {
       let loginModel = Object.assign({},this.loginFormModel.value);
       this.authService.login(loginModel).subscribe((response)=>{
-        this.toastr.success("Giris yapildi",loginModel.firstName + loginModel.lastName);
+        let userName = this.userService.getUserByMail(loginModel.email);
+        console.log(userName);
+        
         this.router.navigateByUrl("cars");
         localStorage.setItem("token",response.data.token);
+        localStorage.setItem("userName",response.data.userName);
+        this.toastr.success("Hosgeldiniz",localStorage.getItem("userName"));
 
       },responseErrorData=>{
 
@@ -45,6 +50,9 @@ export class LoginComponent implements OnInit{
     else{
       this.toastr.warning("Formu bos birakmayiniz!!");
     }
+  }
+  directRegister(){
+    this.router.navigateByUrl("register");
   }
 
 }
