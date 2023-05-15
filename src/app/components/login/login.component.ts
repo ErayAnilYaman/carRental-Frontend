@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit{
         
         this.router.navigateByUrl("cars");
         localStorage.setItem("token",response.data.token);
-        localStorage.setItem("userName",response.data.userName);
+        localStorage.setItem("User",response.data.user);
         this.toastr.success("Hosgeldiniz",localStorage.getItem("userName"));
 
       },responseErrorData=>{
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit{
     }
   }
   directRegister(){
-    this.router.navigateByUrl("register");
+    this.router.navigate(["register"]);
   }
 
 }

@@ -1,8 +1,7 @@
 export interface User{
-    userId:number
-    carId:number;
-    customerId:number;
-    userName:string;
+    id:number
+    firstName:string;
+    lastName:string;
     email:string;
-
+    status:boolean;
 }

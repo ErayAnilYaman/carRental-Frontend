@@ -32,7 +32,7 @@ export class AuthService {
     return false;
   }
   logOut(){
-    localStorage.removeItem("Authorization");
-    localStorage.removeItem("userName");
+    localStorage.removeItem("token");
+    localStorage.removeItem("User");
   }
 }

@@ -1,5 +1,5 @@
 <div class="row mt-4" style="margin-left: 15%" 
->
+*ngIf="itemLoaded">
 <div *ngFor="let carDetail of carsDetail" style="width: 36rem;">
   <img
     
@@ -37,4 +37,19 @@
   
   <button type="submit" (click)="checkValuesAndGetPay(carDetail.carId)"   class="btn btn-primary">Ödemeyi tamamla</button>
 </div>
+</div>
+<div *ngIf="!itemLoaded">
+  <ul class="list-group list-group-horizontal">
+    <li class="list-group-item">Araba ID</li>
+    <li class="list-group-item">Musteri ID</li>
+    <li class="list-group-item">Kiralanma Tarihi</li>
+    <li class="list-group-item">Sonlanma Tarihi</li>
+  </ul>
+  <ul class="list-group list-group-horizontal-sm" *ngFor="let rental of rentals">
+    <li class="list-group-item">{{rental.carId}}</li>
+    <li class="list-group-item">{{rental.customerId}}</li>
+    <li class="list-group-item">{{rental.rentDate}}</li>
+    <li class="list-group-item">{{rental.returnDate}}</li>
+
+  </ul>
 </div>

@@ -27,6 +27,7 @@ export class RentalComponent implements OnInit {
   returnsDate: string;
   pickUpDate:Date;
   returnDate:Date;
+  itemLoaded:boolean = false;
   
   baseUrl = "https://localhost:44318/Uploads/Images/"
 
@@ -40,9 +41,11 @@ export class RentalComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params)=>{
       if (params["carId"]) {
+        this.itemLoaded =true;
         this.getRentalsByCarId(params["carId"])
         this.getCarDetailsByCarId(params["carId"])
         this.getUserByCarId(params["carId"])
+        
       }
       else{
         this.getRentals();
@@ -52,7 +55,7 @@ export class RentalComponent implements OnInit {
   }
   
   getRentals(){
-    this.rentalService.getRentals().subscribe((response)=>{
+    this.rentalService.getAll().subscribe((response)=>{
       this.rentals = response.data
       this.dataLoaded = true
     })

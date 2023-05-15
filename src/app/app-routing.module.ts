@@ -16,6 +16,7 @@ import { LoginGuard } from './guards/login.guard';
 import { BrandAddComponent } from './components/add/brand-add/brand-add.component';
 import { BrandUpdateComponent } from './components/update/brand-update/brand-update.component';
 import { CarImageAddComponent } from './components/add/car-image-add/car-image-add.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -28,7 +29,7 @@ const routes: Routes = [
   {path:"cars/brand/:brandId",component:CarComponent},
   {path:"cars/carDetails/:id",component:CarDetailComponent},
   {path:"cars/carDetails",component:CarDetailComponent},
-  {path:"rental/:carId",component:RentalComponent},
+  {path:"rentals/:carId",component:RentalComponent},
   {path:"payment/:carId",component:PaymentComponent},
   {path:"cars/add",component:CarAddComponent,canActivate:[LoginGuard]},
   {path:"brands/add",component:BrandAddComponent,canActivate:[LoginGuard]},
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"carimages/add",component:CarImageAddComponent,canActivate:[LoginGuard]},
+  {path:"profile/:userId",component:ProfileComponent,canActivate:[LoginGuard]},
 ];
 
 @NgModule({

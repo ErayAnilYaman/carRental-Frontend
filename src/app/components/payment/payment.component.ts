@@ -61,7 +61,7 @@ export class PaymentComponent implements OnInit {
   submit() {
 
     this.paymentService.makePay(this.cardNumber, this.cardOwnerName, this.cardCvc, this.cardExpiration)
-    this.rentalService.addRental(this.rental)
+    this.rentalService.add(this.rental)
     this.toastrService.success("Kiralama başarılı", "BASARILI")
     this.router.navigateByUrl("")
   }

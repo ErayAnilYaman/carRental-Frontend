@@ -49,12 +49,12 @@ export class CarDetailComponent implements OnInit {
   }
   addRental(rental:Rental){
 
-    this.rentalService.addRental(rental)
+    this.rentalService.add(rental)
     this.toastrService.success("Siparis Tarihi Belirlendi");
 
   }
   listRentals(){
-    this.rentalService.getRentals().subscribe((response)=>{
+    this.rentalService.getAll().subscribe((response)=>{
       this.rentalList = response.data
     });
     this.toastrService.success("Kiralanan urunler listelendi")

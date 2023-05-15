@@ -38,7 +38,7 @@
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="result">
         <li class="nav-item">
-          <a class="nav-link" href="">Hello {{userName}}</a>
+          <a class="nav-link" *ngFor="let user of currentUser" href="/profile/{{userid}}" (click)="goToProfile(userid)" >Hello {{  user.firstName + " " + user.lastName }}</a>
         </li>
         <li>
           <a href="" type="button" class= "btn btn-danger" (click)="logOut()">Cikis Yap</a>

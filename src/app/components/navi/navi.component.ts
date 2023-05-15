@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterComponent } from '../register/register.component';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
+import { parseHostBindings } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
+import { Profile } from 'src/app/models/profile';
 
 @Component({
   selector: 'app-navi',
@@ -10,25 +15,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./navi.component.css']
 })
 export class NaviComponent implements OnInit {
-  
+  dataLoaded:boolean = false;
   result:boolean;
   title:string = "RentACar"
   brand:string = "TouchRent"
-  filterText = ""
-  userName:string
-  constructor(private authService:AuthService,private router:Router){}
+  userName:string;
+  userid:string;
+  currentUser:User[];
+  constructor(private authService:AuthService,private router:Router,private userService:UserService,
+    private toastrService:ToastrService){}
   ngOnInit(): void {
     this.IsAuthentic();
-    if (localStorage.getItem("Authorization")) {
-      this.IsAuthentic();
-      this.result = true;
-    }
     if (this.result === true) {
-      this.userName = localStorage.getItem("userName");
+      this.userid = localStorage.getItem("User");
+      let userId = parseInt(this.userid);
+      this.userService.getUserById(userId).subscribe((response)=>{
+        this.currentUser = response.data
+        console.log(this.currentUser);
+        this.dataLoaded = true;
+      })
+    }
+    else{
+      this.dataLoaded =false;
     }
     
   }
-
   IsAuthentic(){
     if (this.authService.isAuthentic()) {
       this.result = true;
@@ -46,5 +57,10 @@ export class NaviComponent implements OnInit {
   logOut(){
     this.authService.logOut();
   }
+  goToProfile(id:string){
+    this.router.navigate(["/profile/" + id])
+  }
+  
+
 
 }
