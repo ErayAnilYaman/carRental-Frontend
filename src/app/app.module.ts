@@ -31,6 +31,8 @@ import { BrandAddComponent } from './components/add/brand-add/brand-add.componen
 import { BrandUpdateComponent } from './components/update/brand-update/brand-update.component';
 import { CarImageAddComponent } from './components/add/car-image-add/car-image-add.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ColorUpdateComponent } from './components/update/color-update/color-update.component';
+import { ColorAddComponent } from './components/add/color-add/color-add.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +57,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrandUpdateComponent,
     CarImageAddComponent,
     ProfileComponent,
+    ColorUpdateComponent,
+    ColorAddComponent,
     
     
   ],

@@ -17,6 +17,7 @@ import { BrandAddComponent } from './components/add/brand-add/brand-add.componen
 import { BrandUpdateComponent } from './components/update/brand-update/brand-update.component';
 import { CarImageAddComponent } from './components/add/car-image-add/car-image-add.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ColorUpdateComponent } from './components/update/color-update/color-update.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path:"brands/add",component:BrandAddComponent,canActivate:[LoginGuard]},
   {path:"cars/update",component:CarUpdateComponent,canActivate:[LoginGuard]},
   {path:"brands/update",component:BrandUpdateComponent,canActivate:[LoginGuard]},
+  {path:"colors/update",component:ColorUpdateComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"carimages/add",component:CarImageAddComponent,canActivate:[LoginGuard]},

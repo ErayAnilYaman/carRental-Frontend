@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit{
         let userName = this.userService.getUserByMail(loginModel.email);
         console.log(userName);
         
-        this.router.navigateByUrl("cars");
         localStorage.setItem("token",response.data.token);
         localStorage.setItem("User",response.data.user);
         this.toastr.success("Hosgeldiniz",localStorage.getItem("userName"));
+        this.router.navigateByUrl("cars");
 
       },responseErrorData=>{
 
