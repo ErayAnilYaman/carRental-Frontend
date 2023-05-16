@@ -16,20 +16,45 @@ export class ColorAddComponent implements OnInit {
 
   }
   colorAddForm:FormGroup;
-
+  colorList:Color[];
+  dataLoaded:boolean = false;
   ngOnInit(): void {
+    this.list();
     this.createColorForm();
   }
   createColorForm(){
     this.colorAddForm = this.formBuilder.group({
-      colorId:["",Validators.required],
       colorName:["",Validators.required],
     })
   }
-  add(color:Color){
-    
+  add(){
+    if (this.colorAddForm.valid) {
+      let colorModel = Object.assign({},this.colorAddForm.value);
+      this.colorService.add(colorModel).subscribe((response)=>{
+        this.toastr.success(response.message);
+        console.log(response);
+        
+
+      },(responseErrorData)=>{
+        console.log(responseErrorData);
+      })  
+    }
+    else{
+      this.toastr.warning("Tum Alanlari Doldurunuz!");
+    }
     
   }
-
-
+  refreshPage() {
+    this.router.navigateByUrl('/colors/add', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+    });
+  }
+  
+  list(){
+    this.colorService.getColors().subscribe((response)=>{
+      this.colorList = response.data;
+      this.dataLoaded = true;
+    })
+  }
+  
 }

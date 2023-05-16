@@ -18,6 +18,7 @@ import { BrandUpdateComponent } from './components/update/brand-update/brand-upd
 import { CarImageAddComponent } from './components/add/car-image-add/car-image-add.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ColorUpdateComponent } from './components/update/color-update/color-update.component';
+import { ColorAddComponent } from './components/add/color-add/color-add.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:"payment/:carId",component:PaymentComponent},
   {path:"cars/add",component:CarAddComponent,canActivate:[LoginGuard]},
   {path:"brands/add",component:BrandAddComponent,canActivate:[LoginGuard]},
+  {path:"colors/add",component:ColorAddComponent,canActivate:[LoginGuard]},
   {path:"cars/update",component:CarUpdateComponent,canActivate:[LoginGuard]},
   {path:"brands/update",component:BrandUpdateComponent,canActivate:[LoginGuard]},
   {path:"colors/update",component:ColorUpdateComponent,canActivate:[LoginGuard]},
