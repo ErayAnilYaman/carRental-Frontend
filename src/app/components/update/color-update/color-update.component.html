@@ -1,11 +1,14 @@
-<table class="table table-hover mt-3">
+<table class="table table-hover mt-3" >
+  
     <thead>
+      <button class="btn btn-primary" (click)="refreshItems()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
       <tr>
         <th>Id</th>
         <th>Marka Adi</th>
       </tr>
     </thead>
     <tbody>
+      
       <tr *ngFor="let color of colorList">
         <td>{{ color.colorId }}</td>
         <td style="padding-left: 1cm">{{color.colorName}}</td>
@@ -15,7 +18,7 @@
             class="btn btn-success btn-xs formButton"
             data-bs-toggle="modal"
             data-bs-target="#updateColorModal"
-            (click)="setSelectedColor(color)"
+            (click)="setColorAndDirectUpdatePath(color)"
             style="margin-right: 16px"
           >
             Güncelle
@@ -36,6 +39,7 @@
     tabindex="-1"
     aria-labelledby="updateColorModal"
     aria-hidden="true"
+    
   >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -49,18 +53,21 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form [formGroup]="colorUpdateForm" *ngIf="colorUpdateForm">
+          <form [formGroup]="colorUpdateForm" *ngIf="colorToUpdate">
             <div class="row">
               <div class="col-8">
-                <label for="colorName">Marka</label>
+                
+              </div>
+              <div class="col-8">
+                <label for="colorName">Renk</label>
                 <input
                   type="text"
                   class="form-control"
-                  *ngIf="selectedColor !== null"
+                  *ngIf="colorToUpdate !== null"
                   id="colorName"
                   name="colorName"
                   formControlName="colorName"
-                  value="{{ selectedColor.colorName }}"
+                  placeholder="{{colorToUpdate.colorName}}"
                   
                 />
               </div>
