@@ -21,7 +21,7 @@ export class NaviComponent implements OnInit {
   brand:string = "TouchRent"
   userName:string;
   userid:string;
-  currentUser:User[];
+  currentUser:User;
   constructor(private authService:AuthService,private router:Router,private userService:UserService,
     private toastrService:ToastrService){}
   ngOnInit(): void {
@@ -31,7 +31,6 @@ export class NaviComponent implements OnInit {
       let userId = parseInt(this.userid);
       this.userService.getUserById(userId).subscribe((response)=>{
         this.currentUser = response.data
-        console.log(this.currentUser);
         this.dataLoaded = true;
       })
     }

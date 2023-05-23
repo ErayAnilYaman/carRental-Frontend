@@ -47,7 +47,7 @@
           type="button"
           class="btn btn-success"
           (click)="updatePath()"
-          routerLink="cars/update"
+          
         >
           Araci Guncelle !! 
         
@@ -60,7 +60,7 @@
           
           type="button"
           class="btn btn-success"
-          routerLink="/rental/{{carDetail.carId}}"
+          (click)="rentPath(carDetail)"
         >
           Araci Kirala !! 
         

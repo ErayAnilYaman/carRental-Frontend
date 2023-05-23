@@ -37,13 +37,13 @@ export class BrandUpdateComponent implements OnInit {
     })
   }
   update(){
+    
+    this.brandUpdateForm.controls["brandId"].setValue(this.selectedBrand.brandId);
     if(this.brandUpdateForm.valid){
       let brandUpdateModel = Object.assign({},this.brandUpdateForm.value);
       this.brandService.update(brandUpdateModel).subscribe((response)=>{
         this.toastr.success(response.message);
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+        
         
       },(responseErrorData)=>{
         console.log(responseErrorData);

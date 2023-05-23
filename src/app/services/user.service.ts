@@ -30,9 +30,9 @@ export class UserService {
     let path = this.apiUrl + "getall";
     return this.httpClient.get<ListResponseModel<User>>(path);
   }
-  getUserById(id:number):Observable<ListResponseModel<User>>{
+  getUserById(id:number):Observable<SingleResponseModel<User>>{
     let path = this.apiUrl + "getuserbyid?id=" + id;
-    return this.httpClient.get<ListResponseModel<User>>(path);
+    return this.httpClient.get<SingleResponseModel<User>>(path);
   }
   getUserDetailsById(id:number):Observable<ListResponseModel<Profile>>{
     let path = this.apiUrl + "getuserdetailsbyid?id=" + id;

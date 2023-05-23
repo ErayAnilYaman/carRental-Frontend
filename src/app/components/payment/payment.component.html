@@ -1,25 +1,30 @@
-<form>
+<form [formGroup]="cardAddForm">
+  <div class="mb-3">
+    <label for="userId" class="form-label">Kullanici</label>
+    <input type="text" class="form-control" id="userId"  maxlength="16"
+           formControlName="userId" name="userId" placeholder="{{userId}}" readonly>
+  </div>
   <div class="mb-3">
     <label for="cardNumber" class="form-label">Kart numarası</label>
     <input type="text" class="form-control" id="cardNumber"  maxlength="16"
-           [(ngModel)]="cardNumber" name="cardNumber" >
+           formControlName="cardNumber" name="cardNumber" >
   </div>
   <div class="mb-3">
-    <label for="cardOwnerName" class="form-label">Kart sahibi</label>
-    <input type="text" class="form-control" id="cardOwnerName" [(ngModel)]="cardOwnerName"
-            name="cardOwnerName" >
+    <label for="userName" class="form-label">Kart sahibi</label>
+    <input type="text" class="form-control" id="userName" formControlName="userName"
+            name="userName" >
   </div>
   <div class="mb-3">
     <label for="date" class="form-label">Tarih (Ay/Yıl)</label>
-    <input type="text" class="form-control" id="date" name="date"  
-           maxlength="4" >
+    <input type="date" class="form-control" id="date" name="date"  
+           maxlength="4" formControlName="exDate" >
   </div>
   <div class="mb-3">
     <label for="cvc" class="form-label">CVC</label>
-    <input type="text"  class="form-control" id="cvc" maxlength="3" 
-           name="cardCvc"
+    <input type="number"  class="form-control" id="cvc" maxlength="3" 
+           name="cardCvc" formControlName="Cvc"
            >
   </div>
 
-  <button type="submit" (click)="submit()" class="btn btn-primary">Ödemeyi tamamla</button>
+  <button type="submit" (click)="add()" class="btn btn-primary">Öde</button>
 </form>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarComponent } from './components/car/car.component';
@@ -14,13 +13,13 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { from } from 'rxjs';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
-import { NgModel  } from '@angular/forms';
-import {FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { NgModel } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterCarSearchPipe } from './pipes/filter-car-search.pipe';
 import { FilterBrandSearchPipe } from './pipes/filter-brand-search.pipe';
-import { FilterColorSearchPipe } from './pipes/filter-color-search.pipe'
+import { FilterColorSearchPipe } from './pipes/filter-color-search.pipe';
 import { ToastrModule } from 'ngx-toastr';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaymentComponent } from './components/payment/payment.component';
 import { CarAddComponent } from './components/add/car-add/car-add.component';
 import { CarUpdateComponent } from './components/update/car-update/car-update.component';
@@ -33,6 +32,8 @@ import { CarImageAddComponent } from './components/add/car-image-add/car-image-a
 import { ProfileComponent } from './components/profile/profile.component';
 import { ColorUpdateComponent } from './components/update/color-update/color-update.component';
 import { ColorAddComponent } from './components/add/color-add/color-add.component';
+import { CustomerAddComponent } from './components/add/customer-add/customer-add.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,8 +60,7 @@ import { ColorAddComponent } from './components/add/color-add/color-add.componen
     ProfileComponent,
     ColorUpdateComponent,
     ColorAddComponent,
-    
-    
+    CustomerAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,12 +70,14 @@ import { ColorAddComponent } from './components/add/color-add/color-add.componen
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass:"toast-bottom-right",
-      timeOut : 3000
+      positionClass: 'toast-bottom-right',
+      timeOut: 3000,
     }),
   ],
-  
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
-  bootstrap: [AppComponent]
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

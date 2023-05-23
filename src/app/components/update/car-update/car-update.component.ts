@@ -1,16 +1,19 @@
+import { Time } from '@angular/common';
 import { Car } from '../../../models/car';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
+import { CarDetail } from 'src/app/models/carDetail';
 import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
+import { timeout, timer } from 'rxjs';
 
 @Component({
   selector: 'app-car-update',
@@ -22,31 +25,35 @@ export class CarUpdateComponent implements OnInit {
     private carService: CarService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private activatedRoute:ActivatedRoute,
-    private colorService:ColorService,
-    private brandService:BrandService,
-    private window:Window
+    private activatedRoute: ActivatedRoute,
+    private colorService: ColorService,
+    private brandService: BrandService,
+    
   ) {}
-  carList: Car[] = [];
+  carList: Car[];
   carUpdateForm: FormGroup;
   selectedCar: Car;
-  colors : Color[] = [];
-  brands : Brand[] = [];
+  selectedCarDetails:CarDetail[];
+  selectedCarDetailBrand:Brand;
+  selectedCarDetailColor:Color;
+  colors: Color[] = [];
+  brands: Brand[] = [];
   ngOnInit(): void {
     this.listCars();
     this.getBrands();
     this.getColors();
+    this.updateCreateForm();
   }
 
-  getColors(){
-    this.colorService.getColors().subscribe(response=>{
+  getColors() {
+    this.colorService.getColors().subscribe((response) => {
       this.colors = response.data;
-    })
+    });
   }
-  getBrands(){
-    this.brandService.getBrands().subscribe(response=>{
+  getBrands() {
+    this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
-    })
+    });
   }
   listCars() {
     this.carService.getCars().subscribe((response) => {
@@ -55,58 +62,77 @@ export class CarUpdateComponent implements OnInit {
   }
 
   delete(car: Car) {
-    this.carService.delete(car).subscribe((response) => {
-      this.toastrService.success(response.message, 'Başarılı');
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    });
-  }
-  deleteById(car:Car){
-    this.carService.deleteById(car.id).subscribe((response)=>{
-      this.toastrService.error("Arac Silindi!!",car.description)
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    })
+    this.setSelectedCarToUpdate(car);
+    this.carService.deleteById(this.selectedCar.id).subscribe(
+      (response) => {
+        this.toastrService.success(response.message, 'Başarılı');
+        this.refreshItems();
+      },
+      (Error) => {
+        console.log(Error);
+      }
+    );
   }
 
   updateCreateForm() {
     this.carUpdateForm = this.formBuilder.group({
-      id: [this.selectedCar.id, Validators.required],
-      brandId: [this.selectedCar.brandId, Validators.required],
-      colorId: [this.selectedCar.colorId, Validators.required],
-      dailyPrice: [this.selectedCar.dailyPrice, Validators.required],
-      modelYear: [this.selectedCar.modelYear, Validators.required],
-      description: [this.selectedCar.description],
+      id: [''],
+      brandId: ['', Validators.required],
+      colorId: ['', Validators.required],
+      dailyPrice: ['', Validators.required],
+      modelYear: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
 
   setSelectedCarToUpdate(car: Car) {
     this.selectedCar = car;
-    this.updateCreateForm();
   }
 
   update() {
+    this.carUpdateForm.controls['id'].setValue(this.selectedCar.id);
+    this.carUpdateForm.controls['colorId'].setValue(this.selectedCar.colorId);
+    this.carUpdateForm.controls['brandId'].setValue(this.selectedCar.brandId);
+
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
-      this.carService.update(carModel).subscribe(
-        (response) => {
-          this.toastrService.success(response.message, 'Başarılı');
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+      this.carService.update(carModel).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.toastrService.success('Islem tamamlandi!');
+          window.location.reload();
         },
-        (responseError) => {
-          console.log(responseError);
-          }
-        
-      );
+        error: (error) => {
+          console.log(carModel);
+          console.log(error);
+          this.toastrService.error(error);
+        },
+      });
     } else {
-      this.toastrService.warning(
-        'Renk ismi boş olamaz',
-        'Güncelleme Başarısız'
-      );
+      console.log(this.carUpdateForm);
+      this.toastrService.warning('Formu doldurunuz', 'Güncelleme Başarısız');
     }
+  }
+  refreshItems() {
+    this.listCars();
+  }
+  refreshPage(){
+    window.location.reload();
+  }
+  chooseBrandId(brand: Brand) {
+    this.selectedCar.brandId = brand.brandId;
+    this.selectedCarDetailBrand = this.selectedCarDetails.find(s=>s.brandId === brand.brandId)
+  }
+  chooseColorId(color: Color) {
+    this.selectedCar.colorId = color.colorId;
+    this.selectedCarDetailColor = this.selectedCarDetails.find(c=>c.colorId === color.colorId)
+
+  }
+  defaultValueForBrandName(brand:Brand){
+    this.selectedCarDetailBrand = this.selectedCarDetails.find(s=>s.brandId === brand.brandId)
+
+  }
+  defaultValueForColorName(color:Color){
+    this.selectedCarDetailColor = this.selectedCarDetails.find(c=>c.colorId === color.colorId)
   }
 }

@@ -1,9 +1,11 @@
-
-
-
-<form>
-    <div class="form-group">
-      <label for="exampleFormControlFile1">Add Image</label>
-      <input type="file" class="form-control-file" id="exampleFormControlFile1" (click)="addImage()">
-    </div>
-  </form>
+<h1>Angular 15 FormData (multipart/data-form) Example</h1>
+<div>
+    <form [formGroup] = "imageForm" (ngSubmit)="onSubmit()">      
+      <div>
+        <input type="file" name="profile" (change)="onFileSelect($event)" />
+      </div>
+      <div>
+        <button type="submit">Upload</button>
+      </div>
+    </form>
+  </div>

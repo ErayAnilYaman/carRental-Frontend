@@ -45,7 +45,7 @@ export class CarService {
   update(car:Car): Observable<ResponseModel> {
     // Send an HTTP PUT request to update the car record in the database
     let updatePath = this.apiUrl + "/update"
-    return this.httpClient.put<ResponseModel>(updatePath,car);
+    return this.httpClient.post<ResponseModel>(updatePath,car);
   }
   delete(car:Car):Observable<ResponseModel>{
     let deletePath = this.apiUrl + "/delete"

@@ -1,9 +1,9 @@
+import { CarDetail } from './../../models/carDetail';
 import { CartItemService } from 'src/app/services/cart-item.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from 'src/app/services/car.service';
 import { Component, OnInit } from '@angular/core';
-import { CarDetail } from 'src/app/models/carDetail';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarImage } from 'src/app/models/carImage';
 import { Car } from 'src/app/models/car';
@@ -21,7 +21,7 @@ export class CarDetailComponent implements OnInit {
   rentDateElement : Date
   returnDateElement :Date
   baseUrl = "https://localhost:44318/Uploads/Images/"
-
+  carDetail : CarDetail;
   dataLoaded = false;
   imageOfPath :string
 
@@ -47,12 +47,7 @@ export class CarDetailComponent implements OnInit {
     this.cartItemService.addToCart(carDetail);
     this.toastrService.success("Urun Eklendi",carDetail.description + " Eklendi!!");
   }
-  addRental(rental:Rental){
-
-    this.rentalService.add(rental)
-    this.toastrService.success("Siparis Tarihi Belirlendi");
-
-  }
+  
   listRentals(){
     this.rentalService.getAll().subscribe((response)=>{
       this.rentalList = response.data
@@ -60,7 +55,10 @@ export class CarDetailComponent implements OnInit {
     this.toastrService.success("Kiralanan urunler listelendi")
   }
   updatePath(){
-    this.router.navigateByUrl("cars/update");
+    this.router.navigate(["/cars/update"]);
+  }
+  rentPath(car:CarDetail){
+    this.router.navigate(["/rentals/" + car.carId]);
   }
 
   

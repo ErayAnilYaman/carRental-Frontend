@@ -44,10 +44,9 @@ export class ColorAddComponent implements OnInit {
     }
     
   }
-  refreshPage() {
-    this.router.navigateByUrl('/colors/add', { skipLocationChange: true }).then(() => {
-      this.router.navigate([this.router.url]);
-    });
+  refreshItems() {
+    this.list();
+    
   }
   
   list(){

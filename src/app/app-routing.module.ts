@@ -19,6 +19,7 @@ import { CarImageAddComponent } from './components/add/car-image-add/car-image-a
 import { ProfileComponent } from './components/profile/profile.component';
 import { ColorUpdateComponent } from './components/update/color-update/color-update.component';
 import { ColorAddComponent } from './components/add/color-add/color-add.component';
+import { CustomerAddComponent } from './components/add/customer-add/customer-add.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -31,17 +32,21 @@ const routes: Routes = [
   {path:"cars/brand/:brandId",component:CarComponent},
   {path:"cars/carDetails/:id",component:CarDetailComponent},
   {path:"cars/carDetails",component:CarDetailComponent},
-  {path:"rentals/:carId",component:RentalComponent},
-  {path:"payment/:carId",component:PaymentComponent},
+  {path:"rentals/:carId",component:RentalComponent,canActivate:[LoginGuard]},
+  {path:"payment/:carId",component:PaymentComponent,canActivate:[LoginGuard]},
+  {path:"payment",component:PaymentComponent,canActivate:[LoginGuard]},
   {path:"cars/add",component:CarAddComponent,canActivate:[LoginGuard]},
   {path:"brands/add",component:BrandAddComponent,canActivate:[LoginGuard]},
   {path:"colors/add",component:ColorAddComponent,canActivate:[LoginGuard]},
+  {path:"customers/add/:userId",component:CustomerAddComponent,canActivate:[LoginGuard]},
   {path:"cars/update",component:CarUpdateComponent,canActivate:[LoginGuard]},
   {path:"brands/update",component:BrandUpdateComponent,canActivate:[LoginGuard]},
   {path:"colors/update",component:ColorUpdateComponent,canActivate:[LoginGuard]},
+  {path:"colors/update/:colorId",component:ColorUpdateComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"carimages/add",component:CarImageAddComponent,canActivate:[LoginGuard]},
+  {path:"carimages/add/:carId",component:CarImageAddComponent,canActivate:[LoginGuard]},
   {path:"profile/:userId",component:ProfileComponent,canActivate:[LoginGuard]},
 ];
 

@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
       if (params["userId"]) {
         this.verifyUserById(params["userId"]);
         this.getNameAndEmail(params["userId"]);
-        
+        this.userId = params["userId"];
         
         console.log(this.verifiedProfile);
       }
@@ -34,19 +34,23 @@ export class ProfileComponent implements OnInit {
     })
     
   }
-
+  userId:number;
+  extendedUser :boolean = false;
   dataLoaded = false;
   status:boolean;
   companyName:string;
   users:User[];
   verifiedProfile:Profile[];
-  verifiedUser:User[];
+  verifiedUser:User;
 
   verifyUserById(id:number){
 
     this.userService.getUserDetailsById(id).subscribe({next:(response)=>{
       this.verifiedProfile = response.data;
       this.companyName = this.verifiedProfile[0].companyName;
+      if (this.companyName !== null) {
+        this.extendedUser = true;
+      }
       this.status = true;
       this.dataLoaded = true;
     }})
@@ -57,7 +61,9 @@ export class ProfileComponent implements OnInit {
       
     })
   }
-
+  createCompanyAccount(id:number){
+    this.router.navigate(["/customers/add/" + id])
+  }
   list(){
     this.userService.listUsers().subscribe({next:(response)=>{
       this.users = response.data;
