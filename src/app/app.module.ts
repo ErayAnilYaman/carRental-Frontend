@@ -33,6 +33,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ColorUpdateComponent } from './components/update/color-update/color-update.component';
 import { ColorAddComponent } from './components/add/color-add/color-add.component';
 import { CustomerAddComponent } from './components/add/customer-add/customer-add.component';
+import { CustomerUpdateComponent } from './components/update/customer-update/customer-update.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CustomerAddComponent } from './components/add/customer-add/customer-add
     ColorUpdateComponent,
     ColorAddComponent,
     CustomerAddComponent,
+    CustomerUpdateComponent,
   ],
   imports: [
     BrowserModule,

@@ -60,6 +60,9 @@ export class CarDetailComponent implements OnInit {
   rentPath(car:CarDetail){
     this.router.navigate(["/rentals/" + car.carId]);
   }
+  turnBackPage(){
+    this.router.navigate(["cars"]);
+  }
 
   
 }

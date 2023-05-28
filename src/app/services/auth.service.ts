@@ -8,7 +8,7 @@ import { Token } from '@angular/compiler';
 import TokenModel from '../models/tokenModel';
 import { UserToLogin } from '../models/userToLogin';
 import { User } from '../models/user';
-import ResponseModel from '../models/ResponseModel';
+import ResponseModel from '../models/responseModel';
 
 @Injectable({
   providedIn: 'root'

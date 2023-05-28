@@ -34,25 +34,34 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginFormModel.valid) {
       let loginModel = Object.assign({}, this.loginFormModel.value);
-      this.authService.login(loginModel).subscribe(
+      this.authService.login(loginModel).subscribe({next:
         (response) => {
           console.log(response.data.user);
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('User', response.data.user);
           this.toastr.success('Hosgeldiniz');
-          window.location.reload();
-          setTimeout(this.router.navigateByUrl("cars").then,4000)
-        },
+          console.log(localStorage.getItem('token'));
+          this.router.navigate(["cars"]);
+          
+        },error:
         (responseErrorData) => {
           console.log(responseErrorData.error);
           this.toastr.error(responseErrorData.error);
-        }
+        }}
       );
+      
+      
     } else {
       this.toastr.warning('Formu bos birakmayiniz!!');
     }
   }
   directRegister() {
     this.router.navigate(['register']);
+  }
+
+  directMainPage(){
+    
+    this.router.navigateByUrl("");
+    
   }
 }

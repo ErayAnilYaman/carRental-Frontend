@@ -14,10 +14,10 @@ export class CustomerComponent implements OnInit {
     
   } 
   ngOnInit(): void {
-    this.getCustomers();
+    this.list();
   }
-  getCustomers(){
-    this.customerService.getCustomers().subscribe((response)=>{
+  list(){
+    this.customerService.list().subscribe((response)=>{
       this.customers = response.data;
       this.dataLoaded = true;
     })

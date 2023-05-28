@@ -1,0 +1,55 @@
+<div class="content" *ngIf="dataLoaded === true">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><h5 class="title">Sirrket Bilgilerini Guncelle</h5></div>
+        <div class="card-body">
+          <form [formGroup]="customerUpdateForm">
+            
+            <div class="mb-3">
+              <label for="companyName">Şirket yeni ismini giriniz</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="companyName"
+                  formControlName="companyName"
+                  class="form-control"
+                  placeholder="{{selectedCustomer.companyName}}"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="companyMail">Şirket mailini giriniz</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="companyMail"
+                  formControlName="companyMail"
+                  class="form-control"
+                  placeholder="Sirket Mailini giriniz"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-primary" (click)="update()">Guncelle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    class="btn btn-primary"
+    
+    (click)="refreshItems()"
+  >
+    <span class="glyphicon glyphicon-refresh"></span> Yenile
+  </button>
+  
+  
+  <div
+    class="spinner-border text-primary"
+    *ngIf="dataLoaded !== true"
+    role="status"
+  >
+    <span class="visually-hidden">Loading...</span>
+  </div>

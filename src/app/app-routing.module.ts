@@ -20,6 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ColorUpdateComponent } from './components/update/color-update/color-update.component';
 import { ColorAddComponent } from './components/add/color-add/color-add.component';
 import { CustomerAddComponent } from './components/add/customer-add/customer-add.component';
+import { CustomerUpdateComponent } from './components/update/customer-update/customer-update.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path:"brands/update",component:BrandUpdateComponent,canActivate:[LoginGuard]},
   {path:"colors/update",component:ColorUpdateComponent,canActivate:[LoginGuard]},
   {path:"colors/update/:colorId",component:ColorUpdateComponent,canActivate:[LoginGuard]},
+  {path:"customers/update/:customerId",component:CustomerUpdateComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"carimages/add",component:CarImageAddComponent,canActivate:[LoginGuard]},

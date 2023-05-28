@@ -76,7 +76,7 @@
                 formControlName="brandId"
               >
                 <option value="">--Choose Brand--</option>
-                <option *ngFor="let brand of brands" (click)="chooseBrandId(brand)"  selected="{{selectedCarDetailBrand}}"  >
+                <option *ngFor="let brand of brands" (click)="chooseBrandId(brand)"   >
                   {{ brand.brandName }}
                 </option>
               </select>

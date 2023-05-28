@@ -6,5 +6,6 @@ export interface Profile{
     email:string;
     companyName:string;
     status:boolean;
+    companyMail:string;
 
 }

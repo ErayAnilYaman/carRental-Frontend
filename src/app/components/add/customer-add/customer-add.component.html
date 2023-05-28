@@ -1,0 +1,85 @@
+<div class="content" *ngIf="dataLoaded === true">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Ürün ekle</h5></div>
+      <div class="card-body">
+        <form [formGroup]="customerAddForm">
+          <div class="mb-3">
+            <label for="companyName">Şirket ismini giriniz</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="companyName"
+                formControlName="companyName"
+                class="form-control"
+                placeholder="Şirket Adı"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="companyMail">Şirket mailini giriniz</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="companyMail"
+                formControlName="companyMail"
+                class="form-control"
+                placeholder="Şirket Maili"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button
+  class="btn btn-primary"
+  
+  (click)="refreshItems()"
+>
+  <span class="glyphicon glyphicon-refresh"></span> Yenile
+</button>
+
+<table class="table table-hover mt-3" >
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Kullanici Adi</th>
+      <th>Şirket ismi</th>
+      <th>Şirket Maili</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="customer">
+      <td>{{ customer.customerId }}</td>
+      <td>{{ selectedUser.firstName +" " + selectedUser.lastName }}</td>
+      <td style="padding-left: 1cm">{{ customer.companyName }}</td>
+      <td style="padding-left: 1cm">{{ customer.companyMail }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-success btn-xs formButton"
+          data-bs-toggle="modal"
+          data-bs-target="#updateCarModal"
+          (click)="directUpdateMenu(customer)"
+          style="margin-right: 16px"
+          
+        >
+          Güncelle
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div
+  class="spinner-border text-primary"
+  *ngIf="dataLoaded !== true"
+  role="status"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>

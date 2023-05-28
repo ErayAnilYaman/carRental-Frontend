@@ -4,28 +4,27 @@ import { Customer } from '../models/customer';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
-import ResponseModel from '../models/ResponseModel';
+import ResponseModel from '../models/responseModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-
-
-  
   apiUrl = "https://localhost:44318/api/customers/"
   constructor(private httpClient:HttpClient) { }
-  getCustomers():Observable<ListResponseModel<Customer>>{
-    return this.httpClient.get<ListResponseModel<Customer>>(this.apiUrl);
+  list():Observable<ListResponseModel<Customer>>{
+    let path = this.apiUrl + "getall"
+    return this.httpClient.get<ListResponseModel<Customer>>(path);
   }
   getCustomersById(id:number):Observable<SingleResponseModel<Customer>>{
     let path = this.apiUrl + "getcustomerbyid?id=" + id
     return this.httpClient.get<SingleResponseModel<Customer>>(path)
   }
-  getCustomerByUserId(id:number):Observable<ListResponseModel<Customer>>{
+  getCustomerByUserId(id:number):Observable<SingleResponseModel<Customer>>{
     let path = this.apiUrl + "getcustomersbyuserid?id=" + id;
-    return this.httpClient.get<ListResponseModel<Customer>>(path);
+    return this.httpClient.get<SingleResponseModel<Customer>>(path);
   }
+  
   add(customer:Customer):Observable<ResponseModel>{
     let path = this.apiUrl + "add";
     return this.httpClient.post<ResponseModel>(path,customer);
@@ -38,6 +37,7 @@ export class CustomerService {
     let path = this.apiUrl + "delete";
     return this.httpClient.post<ResponseModel>(path,customer);
   }
+  
 
 
 }

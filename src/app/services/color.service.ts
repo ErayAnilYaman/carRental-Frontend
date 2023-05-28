@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, ObservableLike } from 'rxjs';
 import { Color } from '../models/color';
 import { ListResponseModel } from '../models/listResponseModel';
-import ResponseModel from '../models/ResponseModel';
+import ResponseModel from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({

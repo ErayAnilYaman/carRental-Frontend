@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Rental } from '../models/rental';
 import { ListResponseModel } from '../models/listResponseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
-import ResponseModel from '../models/ResponseModel';
+import ResponseModel from '../models/responseModel';
 
 @Injectable({
   providedIn: 'root'

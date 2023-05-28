@@ -26,7 +26,9 @@ export class CarComponent implements OnInit {
     private toastrService:ToastrService) {}
 
   ngOnInit(): void {
+    
     this.activatedRoute.params.subscribe(params=>{
+      
       if(params["brandId"])
       {
         this.getCarsByBrand(params["brandId"]);
@@ -43,6 +45,7 @@ export class CarComponent implements OnInit {
   getCars() {
     this.carService.getCarDetails().subscribe((response) => {
       this.carDetails = response.data;
+      
     });
   }
   getCarsByBrand(brandId:number){
