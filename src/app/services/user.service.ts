@@ -38,5 +38,9 @@ export class UserService {
     let path = this.apiUrl + "getuserdetailsbyid?id=" + id;
     return this.httpClient.get<ListResponseModel<Profile>>(path);
   }
-
+  getUserDetailsByCustomerId(id:number):Observable<ListResponseModel<Profile>>{
+    let path = this.apiUrl + "getuserdetailsbycustomerid?id=" + id;
+    return this.httpClient.get<ListResponseModel<Profile>>(path);
+  }
+  
 }
