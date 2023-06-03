@@ -1,95 +1,89 @@
-<table class="table table-hover mt-3" >
-  
-    <thead>
-      <button class="btn btn-primary" (click)="refreshItems()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
-      <tr>
-        <th>Id</th>
-        <th>Marka Adi</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <tr *ngFor="let color of colorList">
-        <td>{{ color.colorId }}</td>
-        <td style="padding-left: 1cm">{{color.colorName}}</td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-success btn-xs formButton"
-            data-bs-toggle="modal"
-            data-bs-target="#updateColorModal"
-            (click)="setColorAndDirectUpdatePath(color)"
-            style="margin-right: 16px"
-          >
-            Güncelle
-          </button>
-        </td>
-        <td>
-          <button type="button" class="btn btn-danger" (click)="delete(color)">
-            Sil
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <div
-    class="modal fade"
-    id="updateColorModal"
-    tabindex="-1"
-    aria-labelledby="updateColorModal"
-    aria-hidden="true"
-    
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="updateColorTitle">Araba Güncelle</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="colorUpdateForm" *ngIf="colorToUpdate">
-            <div class="row">
-              <div class="col-8">
-                
-              </div>
-              <div class="col-8">
-                <label for="colorName">Renk</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  *ngIf="colorToUpdate !== null"
-                  id="colorName"
-                  name="colorName"
-                  formControlName="colorName"
-                  placeholder="{{colorToUpdate.colorName}}"
-                  
-                />
-              </div>
-              
-              
-              
-              
+<table class="table table-hover mt-3">
+  <thead>
+    <button class="btn btn-primary" (click)="refreshItems()">
+      <span class="glyphicon glyphicon-refresh"></span> 
+        Refresh
+      <span class="glyphicon glyphicon-refresh"></span>
+    </button>
+    <tr>
+      <th>Id</th>
+      <th>Marka Adi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let color of colorList">
+      <td>{{ color.colorId }}</td>
+      <td style="padding-left: 1cm">{{ color.colorName }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-success btn-xs formButton"
+          data-bs-toggle="modal"
+          data-bs-target="#updateColorModal"
+          (click)="setColorAndDirectUpdatePath(color)"
+          style="margin-right: 16px"
+        >
+          Güncelle
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="delete(color)">
+          Sil
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  class="modal fade"
+  id="updateColorModal"
+  tabindex="-1"
+  aria-labelledby="updateColorModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateColorTitle">Araba Güncelle</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="colorUpdateForm" *ngIf="colorToUpdate">
+          <div class="row">
+            <div class="col-8"></div>
+            <div class="col-8">
+              <label for="colorName">Renk</label>
+              <input
+                type="text"
+                class="form-control"
+                *ngIf="colorToUpdate !== null"
+                id="colorName"
+                name="colorName"
+                formControlName="colorName"
+                placeholder="{{ colorToUpdate.colorName }}"
+              />
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Vazgeç
-          </button>
-          <button
-            class="btn btn-primary"
-            (click)="update()"
-            data-bs-dismiss="modal"
-          >
-            Kaydet
-          </button>
-        </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Vazgeç
+        </button>
+        <button
+          class="btn btn-primary"
+          (click)="update()"
+          data-bs-dismiss="modal"
+        >
+          Kaydet
+        </button>
       </div>
     </div>
   </div>
+</div>

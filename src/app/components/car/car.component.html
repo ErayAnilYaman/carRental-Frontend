@@ -1,78 +1,77 @@
 <div class="mb-3">
   <label for="filterText" class="form-label"></label>
-  <input  type="text" [(ngModel)] = "filterText" class="form-control" id="filterText"
-   placeholder="Dilediginiz urunu aratabilirsiniz" >
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Dilediginiz urunu aratabilirsiniz"
+  />
 </div>
 <div *ngIf="filterText" class="alert alert-dark">
-  {{filterText}} aradiniz.
+  {{ filterText }} aradiniz.
 </div>
-<div class="row mt-4" style="margin-left: 1%" >
+<div class="row mt-4" style="margin-left: 1%">
   <div
-    *ngFor="let carDetail of carDetails | filterCarSearch:filterText"
+    *ngFor="let carDetail of carDetails | filterCarSearch : filterText"
     class="card mt-2 mr-2"
     style="width: 18rem; margin-right: 10px"
   >
-  <img
     
-  *ngIf="carDetail.imagePath"
-  [src]="baseUrl+carDetail.imagePath"
-  class="card-img-top"
-  style="object-fit: cover"
-  width="100"
-  height="50%"
-/>
+      <img
+        *ngIf="carDetail.imagePath"
+        [src]="baseUrl + carDetail.imagePath"
+        class="card-img-top"
+        style="object-fit: cover"
+        width="100"
+        height="50%"
+      />
 
-<img
-  *ngIf="!carDetail.imagePath"
-  [src]="baseUrl+'defaultCar.jpg'"
-  class="card-img-top"
-  style="object-fit: cover"
-  width="100"
-  height="50%"
-/>
+      <img
+        *ngIf="!carDetail.imagePath"
+        [src]="baseUrl + 'defaultCar.jpg'"
+        class="card-img-top"
+        style="object-fit: cover"
+        width="100"
+        height="50%"
+      />
+    
 
     <div class="card-body">
-      <h4 class="cart-title">{{carDetail.description+ " " + carDetail.modelYear}}</h4>
+      <h4 class="cart-title">
+        {{ carDetail.description + " " + carDetail.modelYear }}
+      </h4>
     </div>
 
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><i><b>Gunluk Ucreti | </b></i>{{ carDetail.dailyPrice }}</li>
-      <li class="list-group-item"><i><b>Renk | </b></i>{{ carDetail.colorName }}</li>
-      <li class="list-group-item"><i><b>Marka | </b></i>{{ carDetail.brandName }}</li>
-
+      <li class="list-group-item">
+        <i><b>Gunluk Ucreti | </b></i>{{ carDetail.dailyPrice }}
+      </li>
+      <li class="list-group-item">
+        <i><b>Renk | </b></i>{{ carDetail.colorName }}
+      </li>
+      <li class="list-group-item">
+        <i><b>Marka | </b></i>{{ carDetail.brandName }}
+      </li>
     </ul>
 
     <div class="card-body">
-      <div class="row" >
-        
-          <button
-          
+      <div class="row">
+        <button
           type="button"
           class="btn btn-success"
-          routerLink="/cars/carDetails/{{carDetail.carId}}"
+          (click)="directCarDetail(carDetail.carId)"
         >
-        Araci Incele !! 
-        
-          
+          Araci Incele !!
         </button>
         <button
-          
           type="button"
           class="btn btn-success"
-          routerLink="/carimages/add/{{carDetail.carId}}"
+          (click)="directImageAdd(carDetail.carId)"
         >
-        Araca Resim Yukle
-        
-          
+          Araca Resim Yukle
         </button>
-        
-
       </div>
     </div>
-    
-
   </div>
-
-
-
- 
+</div>

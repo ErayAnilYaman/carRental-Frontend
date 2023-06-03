@@ -1,3 +1,4 @@
+import { CarImageService } from './../../services/car-image.service';
 import { CarDetail } from './../../models/carDetail';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
@@ -9,140 +10,153 @@ import { CarService } from 'src/app/services/car.service';
 import { CartItemService } from 'src/app/services/cart-item.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { CarImage } from 'src/app/models/carImage';
 
 @Component({
   selector: 'app-rental',
   templateUrl: './rental.component.html',
-  styleUrls: ['./rental.component.css']
+  styleUrls: ['./rental.component.css'],
 })
 export class RentalComponent implements OnInit {
   dataLoaded = false;
-  rentals:Rental[] = [];
-  carsDetail:CarDetail[] = []
-  price : number
-  car:CarDetail
-  currentRental:Rental;
-  currentUser:User[] = [];
+  rentals: Rental[] ;
+  carsDetail: CarDetail[];
+  price: number;
+  car: CarDetail;
+  currentRental: Rental;
+  currentUser: User[] ;
   picksUpDate: string;
   returnsDate: string;
-  pickUpDate:Date;
-  returnDate:Date;
-  itemLoaded:boolean = false;
-  
-  baseUrl = "https://localhost:44318/Uploads/Images/"
+  pickUpDate: Date;
+  returnDate: Date;
+  itemLoaded: boolean = false;
+  imageList:CarImage[];
+  selectedCarImage: CarImage;
+  baseUrl = 'https://localhost:44318/Uploads/Images/';
 
-
-
-  constructor(private rentalService:RentalService,private activatedRoute:ActivatedRoute,
-    private toastrService:ToastrService,private carService:CarService,private router:Router,
-    private carItemService:CartItemService,private userService:UserService){
-
-  }
+  constructor(
+    private rentalService: RentalService,
+    private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService,
+    private carService: CarService,
+    private router: Router,
+    private carItemService: CartItemService,
+    private userService: UserService,
+    private carImageService:CarImageService,
+  ) {}
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params)=>{
-      if (params["carId"]) {
-        this.itemLoaded =true;
-        this.getRentalsByCarId(params["carId"])
-        this.getCarDetailsByCarId(params["carId"])
-        this.getUserByCarId(params["carId"])
-        
-      }
-      else{
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['carId']) {
+        this.itemLoaded = true;
+        this.getRentalsByCarId(params['carId']);
+        this.getCarDetailsByCarId(params['carId']);
+        this.getUserByCarId(params['carId']);
+      } else {
+        this.itemLoaded = true;
         this.getRentals();
       }
-    }
-    )
+    });
+  }
+  getCarImageByCarId(id:number){
+    this.carImageService.getCarImagesByCarId(id).subscribe((res)=>{
+      this.imageList = res.data;
+    },(err)=>{
+      console.log(err);
+    })
+  }
+  getRentals() {
+    this.rentalService.getAll().subscribe((response) => {
+      this.rentals = response.data;
+      this.dataLoaded = true;
+    });
+  }
+  getRentalsByCarId(carId: number) {
+    this.rentalService.getRentalByCarId(carId).subscribe((response) => {
+      this.rentals = response.data;
+      this.dataLoaded = true;
+    });
+  }
+  getCarDetailsByCarId(id: number) {
+    this.carService.getCarDetailsById(id).subscribe((response) => {
+      this.carsDetail = response.data;
+      this.dataLoaded = true;
+    });
   }
   
-  getRentals(){
-    this.rentalService.getAll().subscribe((response)=>{
-      this.rentals = response.data
-      this.dataLoaded = true
-    })
-  }
-  getRentalsByCarId(carId:number){
-    this.rentalService.getRentalByCarId(carId).subscribe((response)=>{
-      this.rentals = response.data
+  getUserByCarId(carId: number) {
+    this.userService.getUserByCarId(carId).subscribe((response) => {
+      this.currentUser = response.data;
       this.dataLoaded = true;
-    })
+    });
   }
-  getCarDetailsByCarId(id:number){
-    this.carService.getCarDetailsById(id).subscribe((response)=>{
-      this.carsDetail = response.data
-      this.dataLoaded = true;
+  checkValuesAndGetPay(carId: number) {
+    this.rentalService.getRentalByCarId(carId).subscribe((response) => {
+      this.rentals = response.data;
 
-    })
-  }
-  getUserByCarId(carId:number){
-    this.userService.getUserByCarId(carId).subscribe((response)=>{
-      this.currentUser = response.data
-      this.dataLoaded = true;
-    })
-  }
-  checkValuesAndGetPay(carId:number) {
-    this.rentalService.getRentalByCarId(carId).subscribe((response)=>{
-        this.rentals = response.data;
-    
-      if (this.rentals.length == 0){
+      if (this.rentals.length == 0) {
         this.router.navigateByUrl('/payment/' + carId);
-      }
-      else{
+      } else {
         this.getCheckRental(carId);
       }
-    })
-    
+    });
   }
   checkReturnDate() {
-    let diffInDays: number = this.calculateDayDiffrence(this.returnsDate, this.picksUpDate)
+    let diffInDays: number = this.calculateDayDiffrence(
+      this.returnsDate,
+      this.picksUpDate
+    );
     if (diffInDays < 0) {
       this.returnDate = this.pickUpDate;
-      this.toastrService.error("Teslim tarihi kiralama tarihinden önce olamaz", "HATA")
-      diffInDays = 1
+      this.toastrService.error(
+        'Teslim tarihi kiralama tarihinden önce olamaz',
+        'HATA'
+      );
+      diffInDays = 1;
     }
     if (diffInDays == 0) {
       diffInDays++;
     }
-    this.priceCalculate(diffInDays)
+    this.priceCalculate(diffInDays);
   }
-  
-  getCheckRental(carId: number)  {
+
+  getCheckRental(carId: number) {
     if (this.rentals.values()) {
-      this.rentals.map(value => {
-        const diff = this.calculateDayDiffrence(value.returnDate.toString().substring(0, value.returnDate.toString().length - 9),this.picksUpDate)
+      this.rentals.map((value) => {
+        const diff = this.calculateDayDiffrence(
+          value.returnDate
+            .toString()
+            .substring(0, value.returnDate.toString().length - 9),
+          this.picksUpDate
+        );
         if (value.returnDate == null || diff > 0) {
-          this.toastrService.error("Bu araç şuan kiralamada", "HATA")
+          this.toastrService.error('Bu araç şuan kiralamada', 'HATA');
           this.router.navigateByUrl('/rental/' + carId);
-          return ;
+          return;
         } else {
           this.router.navigateByUrl('/payment/' + carId);
-          
         }
-      })
+      });
+    } else {
+      this.toastrService.warning('Formu doldurunuz!');
     }
-    else{
-      this.toastrService.warning("Formu doldurunuz!");
-    }
-    
-    
-    
-
   }
   calculateDayDiffrence(dateForReturn: string, dateForPickUp: string) {
-    const dateForReturnMS = this.convertToMs(dateForReturn)
-    const dateForPickUpMS = this.convertToMs(dateForPickUp)
+    
+    const dateForReturnMS = this.convertToMs(dateForReturn);
+    const dateForPickUpMS = this.convertToMs(dateForPickUp);
     const diffInMilliseconds = dateForReturnMS - dateForPickUpMS;
     return diffInMilliseconds / (1000 * 60 * 60 * 24);
   }
   priceCalculate(dayCount: number) {
-    this.carsDetail.map(t => this.price = dayCount * t.dailyPrice)
+    this.carsDetail.map((t) => (this.price = dayCount * t.dailyPrice));
   }
-  
+
   convertToMs(date: string): number {
-    const data = date.split("-")
+    const data = date.split('-');
     const year = parseInt(data[0]);
     const month = parseInt(data[1]);
     const day = parseInt(data[2]);
-    return new Date(year, month, day).getTime()
+    return new Date(year, month, day).getTime();
   }
   // postRental(rental:Rental){
   //   if (this.pickUpDate && this.returnDate) {
@@ -157,8 +171,6 @@ export class RentalComponent implements OnInit {
   //   else{
   //     this.toastrService.error("Hata!!")
   //   }
-    
 
   // }
-  
 }

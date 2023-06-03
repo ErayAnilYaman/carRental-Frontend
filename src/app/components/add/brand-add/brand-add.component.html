@@ -1,27 +1,57 @@
 <div class="content">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header"><h5 class="title">Ürün ekle</h5></div>
-            <div class="card-body">
-                <form [formGroup] = "brandAddForm" >
-                    
-                   <div class="mb-3">
-                    <label for="brandName">Marka Adı</label>
-                    <div class="form-group">
-                        <input type="text"
-                        id="brandName"
-                        formControlName="brandName" class="form-control" 
-                        placeholder="Marka"/>
-                    </div>
-                   </div>
-                    
-                </form>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Ürün ekle</h5></div>
+      <div class="card-body">
+        <form [formGroup]="brandAddForm">
+          <div class="mb-3">
+            <label for="brandName">Marka Adı</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="brandName"
+                formControlName="brandName"
+                class="form-control"
+                placeholder="Marka"
+              />
             </div>
-            <div class="card-footer">
-                <button class="btn btn-fill btn-primary" (click)="add()" >Ekle</button>
-            </div>
-        </div>
-        
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+      </div>
     </div>
-    
   </div>
+</div>
+<button
+  class="btn btn-primary"
+  *ngIf="dataLoaded === true"
+  (click)="refreshItems()"
+>
+  <span class="glyphicon glyphicon-refresh"></span> Refresh
+</button>
+<div
+  class="spinner-border text-primary"
+  *ngIf="dataLoaded !== true"
+  role="status"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+<table class="table table-hover mt-3">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Marka Adi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brand of brandList">
+      <td>{{ brand.brandId }}</td>
+      <td style="padding-left: 1cm">{{ brand.brandName }}</td>
+      <td>
+        <button type="button" class="btn btn-outline-warning" (click)="directUpdatePath()">Guncelle</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

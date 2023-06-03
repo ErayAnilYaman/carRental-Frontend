@@ -59,12 +59,12 @@ export class BrandUpdateComponent implements OnInit {
     this.selectedBrand = brand;
     this.createUpdateForm();
   }
-  delete(brand: Brand) {
+  delete(brand:Brand) {
     this.brandService.delete(brand).subscribe((response) => {
       this.toastr.success(response.message, 'Başarılı');
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      
+    },(err)=>{
+      console.log(err);
     });
   }
 }

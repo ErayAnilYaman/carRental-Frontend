@@ -19,7 +19,6 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
- 
   constructor(
     private rentalService: RentalService,
     private activatedRoute: ActivatedRoute,
@@ -31,18 +30,20 @@ export class PaymentComponent implements OnInit {
     private userService: UserService
   ) {}
   dataLoaded = false;
+  payToDelete: Pay;
   cardAddForm: FormGroup;
+  cardUpdateForm: FormGroup;
   userId: number;
   cardList: Pay[];
-  selectedUser:User;
+  selectedUser: User;
+  selectedPayment: Pay;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      this.userId = parseInt(localStorage.getItem("User"));
+      this.userId = parseInt(localStorage.getItem('User'));
       if (params['carId']) {
-        
         this.createCardAddForm();
+        this.createCardUpdateForm();
         this.listCardsByUserId(this.userId);
-        
       } else {
         this.listCardsByUserId(this.userId);
       }
@@ -50,42 +51,92 @@ export class PaymentComponent implements OnInit {
   }
   createCardAddForm() {
     this.cardAddForm = this.formBuilder.group({
-      userId:['',Validators.required],
+      userId: ['', Validators.required],
       userName: ['', Validators.required],
       cardNumber: ['', Validators.required],
-      Cvc: ['', Validators.required],
+      cvc: ['', Validators.required],
+    });
+  }
+  createCardUpdateForm() {
+    this.cardUpdateForm = this.formBuilder.group({
+      id: ['', Validators.required],
+      userName: ['', Validators.required],
+      cardNumber: ['', Validators.required],
+      cvc: ['', Validators.required],
       exDate: ['', Validators.required],
     });
   }
-  add(){
-    
-    this.cardAddForm.controls["userId"].setValue(this.userId);
+  add() {
+    this.cardAddForm.controls['userId'].setValue(this.userId);
     if (this.cardAddForm.valid) {
-      let cardModel = Object.assign({},this.cardAddForm.value);
-      this.paymentService.add(cardModel).subscribe((response)=>{
-        console.log(response);
-
-      },(responseError)=>{
-        console.log(responseError);
-      })
+      let cardModel = Object.assign({}, this.cardAddForm.value);
+      this.paymentService.add(cardModel).subscribe(
+        (response) => {
+          console.log(response);
+          this.toastrService.success('Kredi Karti Eklendi!');
+        },
+        (responseError) => {
+          console.log(responseError);
+        }
+      );
+    } else {
+      this.toastrService.warning('Formu doldurunuz!');
+    }
+  }
+  deleteById(id: number) {
+    this.paymentService.getPayById(id).subscribe(
+      (res) => {
+        this.payToDelete = res.data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    if (this.payToDelete == null) {
+      this.paymentService.delete(id).subscribe({
+        next: (res) => {
+          this.toastrService.success('Kredi Karti silindi!');
+          window.location.reload();
+        },
+        error: (err) => {
+          console.log(err);
+          this.toastrService.error(err.error, 'Kredi karti silinemedi!');
+        },
+      });
     }
     else{
-      this.toastrService.warning("Formu doldurunuz!");
+      this.toastrService.warning("Gecersiz Kredi Karti!");
     }
   }
+  // update(){
+  //   this.cardUpdateForm.controls["userId"].setValue(this.userId);
+  //   this.cardUpdateForm.controls["id"].setValue(this.selectedPayment.id);
+  //   if(this.cardUpdateForm.valid){
+  //     let cardUpdateModel = Object.assign({},this.cardUpdateForm.value);
+  //     this.paymentService.update().subscribe((res)=>{
+
+  //     },(err)=>{
+
+  //     });
+  //   }
+  //   else{
+  //     this.toastrService.warning("Tum formu doldurunuz!");
+  //   }
+  // }
   listCardsByUserId(userId: number) {
-    this.paymentService.listByUserId(userId).subscribe((response) => {
-      this.cardList = response.data;
-      console.log(response);
-    },(error)=>{
-      console.log(error);
+    this.paymentService.listByUserId(userId).subscribe(
+      (response) => {
+        this.cardList = response.data;
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  getUserById() {
+    this.userService.getUserById(this.userId).subscribe((response) => {
+      this.selectedUser = response.data;
     });
   }
-  getUserById(){
-    this.userService.getUserById(this.userId).subscribe((response)=>{
-      this.selectedUser = response.data
-    })
-  }
-  
-  
 }

@@ -6,6 +6,7 @@ import { Brand } from '../models/brand';
 import { ListResponseModel } from '../models/listResponseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { BrandAddComponent } from '../components/add/brand-add/brand-add.component';
+import ResponseModel from '../models/responseModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,16 +17,21 @@ export class BrandService {
   getBrands():Observable<ListResponseModel<Brand>>{
     return this.httpClient.get<ListResponseModel<Brand>>(this.apiUrl + "getall");
   }
-  add(brand:Brand):Observable<SingleResponseModel<Brand>>{
+  getBrandById(id:number):Observable<SingleResponseModel<Brand>>{
+    let path = this.apiUrl + "getbrandbyid?id=" + id;
+    return this.httpClient.get<SingleResponseModel<Brand>>(path);
+  }
+  add(brand:Brand):Observable<ResponseModel>{
     let addPath = this.apiUrl + "add"
-    return this.httpClient.post<SingleResponseModel<Brand>>(addPath,brand);
+    return this.httpClient.post<ResponseModel>(addPath,brand);
   }
-  update(brand:Brand):Observable<SingleResponseModel<Brand>>{
+  update(brand:Brand):Observable<ResponseModel>{
     let updatePath = this.apiUrl + "update";
-    return this.httpClient.put<SingleResponseModel<Brand>>(updatePath,brand);
+    return this.httpClient.post<ResponseModel>(updatePath,brand);
   }
-  delete(brand:Brand):Observable<SingleResponseModel<Brand>>{
+  delete(brand:Brand):Observable<ResponseModel>{
     let deletePath = this.apiUrl + "delete";
-    return this.httpClient.post<SingleResponseModel<Brand>>(deletePath,brand);
+    return this.httpClient.post<ResponseModel>(deletePath,brand);
   }
+  
 }

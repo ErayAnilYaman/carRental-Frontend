@@ -21,8 +21,8 @@ export class CarAddComponent implements OnInit {
     private brandService:BrandService,
     private colorService:ColorService,
   ) {}
-  brands:Brand[]=[];
-  colors:Color[]=[];
+  brands:Brand[];
+  colors:Color[];
   carAddForm: FormGroup;
   ngOnInit(): void {
     this.createCarAddForm();
@@ -56,9 +56,7 @@ export class CarAddComponent implements OnInit {
           this.toastrService.success(data.message);
         },
         (responseError) => {
-          for (let i = 0; i < responseError.error.Errors.length; i++) {
-            this.toastrService.error(responseError.error.Errors[i].ErrorMessage);
-          }
+          this.toastrService.error(responseError.error);
         }
       );
     }

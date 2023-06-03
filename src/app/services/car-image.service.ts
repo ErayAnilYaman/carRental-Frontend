@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import ResponseModel from '../models/responseModel';
 import { map } from  'rxjs/operators';
+import { Car } from '../models/car';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,11 @@ export class CarImageService {
   constructor(private httpClient:HttpClient) { }
 
   getCarImagesByCarId(id:number):Observable<ListResponseModel<CarImage>>{
-    let carImagesByCarId = this.apiUrl + "/getimagesbycarid?id=" + id
+    let carImagesByCarId = this.apiUrl + "getimagesbycarid?id=" + id
     return this.httpClient.get<ListResponseModel<CarImage>>(carImagesByCarId);
   }
   getCarImagesById(id:number):Observable<ListResponseModel<CarImage>>{
-    let carImages = this.apiUrl + "/getbyid?id=" + id
+    let carImages = this.apiUrl + "getbyid?id=" + id
     return this.httpClient.get<ListResponseModel<CarImage>>(carImages)
   }
   add(formData:any):Observable<ResponseModel>{
@@ -28,6 +29,10 @@ export class CarImageService {
     return this.httpClient.post<ResponseModel>(path,formData,{
       reportProgress : true,
     });
+  }
+  list():Observable<ListResponseModel<CarImage>>{
+    let path = this.apiUrl + "getall";
+    return this.httpClient.get<ListResponseModel<CarImage>>(path);
   }
 
 }

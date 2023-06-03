@@ -4,6 +4,7 @@ import { ListResponseModel } from '../models/listResponseModel';
 import { Observable } from 'rxjs';
 import { Pay } from '../models/pay';
 import ResponseModel from '../models/responseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,13 @@ export class PaymentService  {
   listByUserId(userId:number):Observable<ListResponseModel<Pay>>{
     let listPath = this.apiUrl + "getbyuserid?id=" + userId;
     return this.httpClient.get<ListResponseModel<Pay>>(listPath);
+  }
+  getPayById(id:number):Observable<SingleResponseModel<Pay>>{
+    let path = this.apiUrl + "getbyid?id=" + id;
+    return this.httpClient.get<SingleResponseModel<Pay>>(path);
+  }
+  delete(id:number):Observable<ResponseModel>{
+    let path = this.apiUrl + "deletebyid?id=" + id;
+    return this.httpClient.post<ResponseModel>(path,id);
   }
 }

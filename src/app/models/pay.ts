@@ -3,6 +3,6 @@ export interface Pay{
     userId:number;
     userName:string;
     cardNumber:string;
-    Cvc:number;
+    cvc:string;
     exDate:Date;
 }
