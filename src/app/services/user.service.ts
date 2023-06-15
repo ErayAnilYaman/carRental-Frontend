@@ -5,6 +5,8 @@ import { User } from '../models/user';
 import { Observable, ObservableNotification } from 'rxjs';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { Profile } from '../models/profile';
+import ResponseModel from '../models/responseModel';
+import { UserForUpdate } from '../models/userForUpdate';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,16 @@ export class UserService {
     let path = this.apiUrl + "getuserdetailsbycustomerid?id=" + id;
     return this.httpClient.get<ListResponseModel<Profile>>(path);
   }
-  
+  delete(user:User):Observable<ResponseModel>{
+    let path = this.apiUrl + "delete";
+    return this.httpClient.post<ResponseModel>(path,user);
+  }
+  deleteById(id:number):Observable<ResponseModel>{
+    let path = this.apiUrl + "deletebyid?id=" + id;
+    return this.httpClient.post<ResponseModel>(path,id);
+  }
+  update(userForUpdate:UserForUpdate):Observable<ResponseModel>{
+    let path = this.apiUrl + "update";
+    return this.httpClient.post<ResponseModel>(path,userForUpdate);
+  }
 }

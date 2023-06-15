@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Pay } from 'src/app/models/pay';
 import { User } from 'src/app/models/user';
+import { timeout, timer } from 'rxjs';
 
 @Component({
   selector: 'app-payment',
@@ -29,9 +30,10 @@ export class PaymentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService
   ) {}
+  carId: number;
   dataLoaded = false;
   payToDelete: Pay;
-  cardAddForm: FormGroup;
+  creditCardForm: FormGroup;
   cardUpdateForm: FormGroup;
   userId: number;
   cardList: Pay[];
@@ -41,42 +43,51 @@ export class PaymentComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.userId = parseInt(localStorage.getItem('User'));
       if (params['carId']) {
-        this.createCardAddForm();
-        this.createCardUpdateForm();
+        this.carId = params['carId'];
+        this.createcreditCardForm();
         this.listCardsByUserId(this.userId);
       } else {
         this.listCardsByUserId(this.userId);
       }
     });
   }
-  createCardAddForm() {
-    this.cardAddForm = this.formBuilder.group({
+  createcreditCardForm() {
+    this.creditCardForm = this.formBuilder.group({
       userId: ['', Validators.required],
       userName: ['', Validators.required],
       cardNumber: ['', Validators.required],
       cvc: ['', Validators.required],
+      status:['',Validators.required],
+      exDate:['',Validators.required],
     });
   }
-  createCardUpdateForm() {
-    this.cardUpdateForm = this.formBuilder.group({
-      id: ['', Validators.required],
-      userName: ['', Validators.required],
-      cardNumber: ['', Validators.required],
-      cvc: ['', Validators.required],
-      exDate: ['', Validators.required],
-    });
+  
+  CheckIfPayWillAdd() {
+    if (this.creditCardForm.controls['status'].value === true) {
+      this.add();
+    }
+    else{
+      this.controlCreditCard();
+    }
+    
   }
   add() {
-    this.cardAddForm.controls['userId'].setValue(this.userId);
-    if (this.cardAddForm.valid) {
-      let cardModel = Object.assign({}, this.cardAddForm.value);
+    this.creditCardForm.controls['userId'].setValue(this.userId);
+
+    if (this.creditCardForm.valid) {
+      let cardModel = Object.assign({}, this.creditCardForm.value);
       this.paymentService.add(cardModel).subscribe(
         (response) => {
-          console.log(response);
-          this.toastrService.success('Kredi Karti Eklendi!');
+          this.toastrService.success('Arac kiralandi');
+          this.toastrService.success(response.message);
         },
         (responseError) => {
-          console.log(responseError);
+          // for (let i = 0; i < responseError.error.Errors.length; i++) {
+          //   const element = responseError.error.Errors[i].ErrorMessage;
+          //   this.toastrService.warning(element);
+          // }
+          console.log(responseError.error);
+          this.toastrService.error(responseError.error)
         }
       );
     } else {
@@ -95,7 +106,7 @@ export class PaymentComponent implements OnInit {
     if (this.payToDelete == null) {
       this.paymentService.delete(id).subscribe({
         next: (res) => {
-          this.toastrService.success('Kredi Karti silindi!');
+          this.toastrService.success(res.message);
           window.location.reload();
         },
         error: (err) => {
@@ -103,37 +114,54 @@ export class PaymentComponent implements OnInit {
           this.toastrService.error(err.error, 'Kredi karti silinemedi!');
         },
       });
-    }
-    else{
-      this.toastrService.warning("Gecersiz Kredi Karti!");
+    } else {
+      this.toastrService.warning('Gecersiz Kredi Karti!');
     }
   }
-  // update(){
-  //   this.cardUpdateForm.controls["userId"].setValue(this.userId);
-  //   this.cardUpdateForm.controls["id"].setValue(this.selectedPayment.id);
-  //   if(this.cardUpdateForm.valid){
-  //     let cardUpdateModel = Object.assign({},this.cardUpdateForm.value);
-  //     this.paymentService.update().subscribe((res)=>{
+ controlCreditCard(){
+  this.creditCardForm.controls['status'].setValue(false);
+  this.creditCardForm.controls['userId'].setValue(this.userId);
+  if (this.creditCardForm.valid) {
+    let input_date = this.creditCardForm.controls['exDate'].value
+    this.checkExDate(input_date);
+    this.toastrService.success("Islem Basarili");
+  }
+  else{
+    this.toastrService.warning("Lutfen Formu Doldurunuz!");
+  }
+ }
+ checkExDate(date:Date){
+  let now_date =  new Date();
+  console.log(now_date);
+  let splitted_str_input_date = date.toString().split("T");
+  console.log(splitted_str_input_date[0]);
 
-  //     },(err)=>{
+  if (date < now_date) {
+    this.toastrService.error("Kart son kullanma tarihi su andan sonra olmalidir!");
+    window.location.reload();
+  }
+  else{
 
-  //     });
-  //   }
-  //   else{
-  //     this.toastrService.warning("Tum formu doldurunuz!");
-  //   }
-  // }
+    setTimeout(function() {
+      console.log("Kart BIlgileri kontrol edildi");
+      }, 2000);
+    
+    console.log("Kart Bilgileri kontorl ediliyor..")
+    
+  }
+ }
   listCardsByUserId(userId: number) {
     this.paymentService.listByUserId(userId).subscribe(
       (response) => {
         this.cardList = response.data;
-        console.log(response);
       },
       (error) => {
         console.log(error);
+
       }
     );
   }
+
   getUserById() {
     this.userService.getUserById(this.userId).subscribe((response) => {
       this.selectedUser = response.data;

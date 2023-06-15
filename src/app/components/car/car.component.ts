@@ -26,7 +26,7 @@ export class CarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private carImageService: CarImageService,
     private toastrService: ToastrService,
-    private router:Router
+    private router:Router,
   ) {}
 
   ngOnInit(): void {

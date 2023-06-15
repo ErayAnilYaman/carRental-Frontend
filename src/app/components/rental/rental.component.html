@@ -1,6 +1,5 @@
-<div class="row mt-4" style="margin-left: 15%" *ngIf="itemLoaded">
-  <div *ngFor="let carDetail of carsDetail" style="width: 36rem">
-    
+<div class="row mt-4" style="margin-left: 5%" *ngIf="itemLoaded">
+  <div *ngFor="let carDetail of carsDetail" style="width: 65rem">
       <img
         *ngIf="carDetail.imagePath"
         [src]="baseUrl + carDetail.imagePath"

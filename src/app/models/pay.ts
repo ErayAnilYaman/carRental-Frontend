@@ -5,4 +5,5 @@ export interface Pay{
     cardNumber:string;
     cvc:string;
     exDate:Date;
+    status:boolean;
 }

@@ -21,6 +21,7 @@ import { ColorUpdateComponent } from './components/update/color-update/color-upd
 import { ColorAddComponent } from './components/add/color-add/color-add.component';
 import { CustomerAddComponent } from './components/add/customer-add/customer-add.component';
 import { CustomerUpdateComponent } from './components/update/customer-update/customer-update.component';
+import { ProfileUpdateComponent } from './components/update/profile-update/profile-update.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -50,6 +51,7 @@ const routes: Routes = [
   {path:"carimages/add",component:CarImageAddComponent,canActivate:[LoginGuard]},
   {path:"carimages/add/:carId",component:CarImageAddComponent,canActivate:[LoginGuard]},
   {path:"profile/:userId",component:ProfileComponent,canActivate:[LoginGuard]},
+  {path:"profile/update/:userId",component:ProfileUpdateComponent,canActivate:[LoginGuard]},
 ];
 
 @NgModule({

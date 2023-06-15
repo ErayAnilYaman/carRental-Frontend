@@ -22,6 +22,12 @@
                 Message
               </button>
             </div>
+            <div>
+              <button type="button" class="btn btn-outline-warning" (click)="directUpdateUserRoute()">
+                Hesabi Guncelle
+              </button>
+              <button type="button" class="btn btn-outline-danger ms-1" (click)="deleteUser()">Hesabi Kaldir</button>
+            </div>
           </div>
         </div>
       </div>
@@ -70,7 +76,7 @@
                 </p>
               </div>
             </div>
-            <hr/>
+            <hr />
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0">Sirket Maili</p>
@@ -82,10 +88,9 @@
                 <p class="text-muted mb-0" *ngIf="!selectedCustomer">
                   Sirket Hesabi Degil
                 </p>
-                
               </div>
             </div>
-            <hr *ngIf="!selectedCustomer"/>
+            <hr *ngIf="!selectedCustomer" />
             <button
               type="button"
               class="btn btn-primary"
@@ -94,7 +99,7 @@
             >
               Sirket Hesabina Gecis Yap
             </button>
-            <hr *ngIf="selectedCustomer"/>
+            <hr *ngIf="selectedCustomer" />
             <button
               type="button"
               class="btn btn-primary"
@@ -103,7 +108,7 @@
             >
               Sirket Hesabini Guncelle
             </button>
-            <hr *ngIf="selectedCustomer"/>
+            <hr *ngIf="selectedCustomer" />
             <button
               type="button"
               class="btn btn-danger"

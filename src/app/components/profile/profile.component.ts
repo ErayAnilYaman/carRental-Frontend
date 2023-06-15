@@ -25,14 +25,12 @@ export class ProfileComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['userId']) {
         this.userId = params['userId'];
-        
+
         this.verifyCustomerByUserId(this.userId);
         this.verifyUserById(this.userId);
         this.listCustomers();
         console.log(this.selectedUser);
         console.log(this.selectedCustomer);
-
-        
       } else {
         this.listUsers();
         this.listCustomers();
@@ -40,6 +38,7 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+  userToDelete:User;
   selectedCustomer: Customer;
   selectedUser: User;
   userId: number;
@@ -48,10 +47,13 @@ export class ProfileComponent implements OnInit {
   status: boolean;
   companyName: string;
   users: User[];
-  customers:Customer[];
+  customers: Customer[];
   verifiedProfile: Profile[];
   verifiedUser: User;
 
+  delete(){
+
+  }
   verifyUserById(id: number) {
     this.userService.getUserById(id).subscribe({
       next: (response) => {
@@ -66,22 +68,47 @@ export class ProfileComponent implements OnInit {
     this.customerService.getCustomerByUserId(id).subscribe(
       (response) => {
         this.selectedCustomer = response.data;
-        
 
         console.log(response);
-        
       },
       (error) => {
         console.log(error);
-        
       }
     );
-    
+  }
+  deleteUser() {
+    let userId = parseInt(localStorage.getItem('User'));
+
+    if (userId != null) {
+      this.userService.getUserById(userId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.userToDelete = res.data;
+          console.log('Silincek Kullanici Bulundu!');
+        },
+        error: (err) => {
+          console.log(err);
+          console.log('Silinecek Kullanici Bulunamadi!');
+        },
+      });
+
+      this.userService.delete(this.userToDelete).subscribe(
+        (res) => {
+          console.log(res);
+          this.toastr.success('Kullanici basariyla silindi!');
+          localStorage.removeItem("token");
+          localStorage.removeItem("User");
+        },
+        (err) => {
+          console.log(err);
+          this.toastr.error('Kullanici sistemsel ariza nedeniyle silinemedi!');
+        }
+      );
+    } else {
+      this.toastr.warning('Kullanici bulunamadi!');
+    }
   }
 
-  createCompanyAccount(id: number) {
-    this.router.navigate(['/customers/add/' + id]);
-  }
   listUsers() {
     this.userService.listUsers().subscribe({
       next: (response) => {
@@ -90,20 +117,31 @@ export class ProfileComponent implements OnInit {
       },
     });
   }
-  listCustomers(){
-    this.customerService.list().subscribe({next:(response)=>{
-      this.customers = response.data;
-      this.dataLoaded = true;
-    }})
+  listCustomers() {
+    this.customerService.list().subscribe({
+      next: (response) => {
+        this.customers = response.data;
+        this.dataLoaded = true;
+      },
+    });
   }
-  deleteCustomerByUserId(customer:Customer){
-    
-    this.customerService.delete(customer).subscribe((response)=>{
-      console.log(response);
-      window.location.reload();
-    },(error)=>{
-      console.log(error);
-    })
-
+  deleteCustomerByUserId(customer: Customer) {
+    this.customerService.delete(customer).subscribe(
+      (response) => {
+        console.log(response);
+        window.location.reload();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  directUpdateUserRoute() {
+    this.router.navigateByUrl(
+      '/profile/update/' + parseInt(localStorage.getItem('User')),
+    );
+  }
+  createCompanyAccount(id: number) {
+    this.router.navigate(['/customers/add/' + id]);
   }
 }

@@ -36,17 +36,15 @@ export class LoginComponent implements OnInit {
       let loginModel = Object.assign({}, this.loginFormModel.value);
       this.authService.login(loginModel).subscribe({next:
         (response) => {
-          console.log(response.data.user);
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('User', response.data.user);
           this.toastr.success('Hosgeldiniz');
-          console.log(localStorage.getItem('token'));
           this.router.navigate(["cars"]);
           
         },error:
         (responseErrorData) => {
           console.log(responseErrorData.error);
-          this.toastr.error(responseErrorData.error);
+          this.toastr.error("Ariza");
         }}
       );
       
