@@ -1,3 +1,4 @@
+import { ComponentFixture } from '@angular/core/testing';
 import { Car } from './models/car';
 import { NgModule } from '@angular/core';
 import { RouterLink, RouterModule, Routes } from '@angular/router';
@@ -22,6 +23,8 @@ import { ColorAddComponent } from './components/add/color-add/color-add.componen
 import { CustomerAddComponent } from './components/add/customer-add/customer-add.component';
 import { CustomerUpdateComponent } from './components/update/customer-update/customer-update.component';
 import { ProfileUpdateComponent } from './components/update/profile-update/profile-update.component';
+import { UserPaymentComponent } from './components/user-payment/user-payment.component';
+import { PaymentUpdateComponent } from './components/update/payment-update/payment-update.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -36,7 +39,7 @@ const routes: Routes = [
   {path:"cardetails",component:CarDetailComponent},
   {path:"rentals/:carId",component:RentalComponent,canActivate:[LoginGuard]},
   {path:"payment/:carId",component:PaymentComponent,canActivate:[LoginGuard]},
-  {path:"payment",component:PaymentComponent,canActivate:[LoginGuard]},
+  {path:"payments/:userId",component:UserPaymentComponent,canActivate:[LoginGuard]},
   {path:"cars/add",component:CarAddComponent,canActivate:[LoginGuard]},
   {path:"brands/add",component:BrandAddComponent,canActivate:[LoginGuard]},
   {path:"colors/add",component:ColorAddComponent,canActivate:[LoginGuard]},
@@ -46,6 +49,7 @@ const routes: Routes = [
   {path:"colors/update",component:ColorUpdateComponent,canActivate:[LoginGuard]},
   {path:"colors/update/:colorId",component:ColorUpdateComponent,canActivate:[LoginGuard]},
   {path:"customers/update/:customerId",component:CustomerUpdateComponent,canActivate:[LoginGuard]},
+  {path:"payments/update/:paymentId",component:PaymentUpdateComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"carimages/add",component:CarImageAddComponent,canActivate:[LoginGuard]},

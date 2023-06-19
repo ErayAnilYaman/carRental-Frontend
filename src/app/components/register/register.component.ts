@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit {
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private router:Router,
-    private authInterceptor:AuthInterceptor,
   ) {}
   ngOnInit(): void {
     this.createRegisterForm();
@@ -36,9 +35,6 @@ export class RegisterComponent implements OnInit {
       let registerModel = Object.assign({}, this.registerForm.value);
       this.authService.register(registerModel).subscribe(
         (response) => {
-          let request :HttpRequest<any>;
-          let handler :HttpHandler
-          this.authInterceptor.intercept(request,handler)
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('User',response.data.user);
           this.toastr.success('Basariyla kayit olundu!');

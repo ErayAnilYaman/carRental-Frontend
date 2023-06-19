@@ -29,4 +29,8 @@ export class PaymentService  {
     let path = this.apiUrl + "deletebyid?id=" + id;
     return this.httpClient.post<ResponseModel>(path,id);
   }
+  update(pay:Pay):Observable<ResponseModel>{
+    let path = this.apiUrl + "update";
+    return this.httpClient.post<ResponseModel>(path,pay);
+  }
 }

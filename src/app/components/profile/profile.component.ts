@@ -141,6 +141,11 @@ export class ProfileComponent implements OnInit {
       '/profile/update/' + parseInt(localStorage.getItem('User')),
     );
   }
+  directCreditCardsPath(){
+    this.router.navigateByUrl(
+      '/payments/' + parseInt(localStorage.getItem("User"))
+    );
+  }
   createCompanyAccount(id: number) {
     this.router.navigate(['/customers/add/' + id]);
   }

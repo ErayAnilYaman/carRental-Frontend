@@ -35,6 +35,8 @@ import { ColorAddComponent } from './components/add/color-add/color-add.componen
 import { CustomerAddComponent } from './components/add/customer-add/customer-add.component';
 import { CustomerUpdateComponent } from './components/update/customer-update/customer-update.component';
 import { ProfileUpdateComponent } from './components/update/profile-update/profile-update.component';
+import { UserPaymentComponent } from './components/user-payment/user-payment.component';
+import { PaymentUpdateComponent } from './components/update/payment-update/payment-update.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { ProfileUpdateComponent } from './components/update/profile-update/profi
     CustomerAddComponent,
     CustomerUpdateComponent,
     ProfileUpdateComponent,
+    UserPaymentComponent,
+    PaymentUpdateComponent,
   ],
   imports: [
     BrowserModule,

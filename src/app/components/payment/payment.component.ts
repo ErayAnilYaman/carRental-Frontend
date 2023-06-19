@@ -30,6 +30,9 @@ export class PaymentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService
   ) {}
+  exYear : string;
+  exMonth : string;
+  creditDate : string;
   carId: number;
   dataLoaded = false;
   payToDelete: Pay;
@@ -44,14 +47,14 @@ export class PaymentComponent implements OnInit {
       this.userId = parseInt(localStorage.getItem('User'));
       if (params['carId']) {
         this.carId = params['carId'];
-        this.createcreditCardForm();
+        this.createCreditCardForm();
         this.listCardsByUserId(this.userId);
       } else {
         this.listCardsByUserId(this.userId);
       }
     });
   }
-  createcreditCardForm() {
+  createCreditCardForm() {
     this.creditCardForm = this.formBuilder.group({
       userId: ['', Validators.required],
       userName: ['', Validators.required],
@@ -62,24 +65,22 @@ export class PaymentComponent implements OnInit {
     });
   }
   
-  CheckIfPayWillAdd() {
-    if (this.creditCardForm.controls['status'].value === true) {
-      this.add();
-    }
-    else{
-      this.controlCreditCard();
-    }
-    
-  }
+  
   add() {
+    this.creditDate = this.exMonth + "/" + this.exYear[1];
+    console.log(this.creditDate);
+    this.creditCardForm.controls['exDate'].setValue(this.creditDate);
     this.creditCardForm.controls['userId'].setValue(this.userId);
-
+    this.checkStatus();
+    console.log(this.creditCardForm.controls['status'].value);
+    
     if (this.creditCardForm.valid) {
       let cardModel = Object.assign({}, this.creditCardForm.value);
       this.paymentService.add(cardModel).subscribe(
         (response) => {
           this.toastrService.success('Arac kiralandi');
           this.toastrService.success(response.message);
+          this.router.navigate([""]);
         },
         (responseError) => {
           // for (let i = 0; i < responseError.error.Errors.length; i++) {
@@ -93,6 +94,13 @@ export class PaymentComponent implements OnInit {
     } else {
       this.toastrService.warning('Formu doldurunuz!');
     }
+  }
+  checkStatus(){
+    let status = this.creditCardForm.controls['status'];
+    if (!status.value) {
+      status.setValue(false);
+      console.log(status.value)
+    } 
   }
   deleteById(id: number) {
     this.paymentService.getPayById(id).subscribe(
@@ -118,38 +126,7 @@ export class PaymentComponent implements OnInit {
       this.toastrService.warning('Gecersiz Kredi Karti!');
     }
   }
- controlCreditCard(){
-  this.creditCardForm.controls['status'].setValue(false);
-  this.creditCardForm.controls['userId'].setValue(this.userId);
-  if (this.creditCardForm.valid) {
-    let input_date = this.creditCardForm.controls['exDate'].value
-    this.checkExDate(input_date);
-    this.toastrService.success("Islem Basarili");
-  }
-  else{
-    this.toastrService.warning("Lutfen Formu Doldurunuz!");
-  }
- }
- checkExDate(date:Date){
-  let now_date =  new Date();
-  console.log(now_date);
-  let splitted_str_input_date = date.toString().split("T");
-  console.log(splitted_str_input_date[0]);
-
-  if (date < now_date) {
-    this.toastrService.error("Kart son kullanma tarihi su andan sonra olmalidir!");
-    window.location.reload();
-  }
-  else{
-
-    setTimeout(function() {
-      console.log("Kart BIlgileri kontrol edildi");
-      }, 2000);
-    
-    console.log("Kart Bilgileri kontorl ediliyor..")
-    
-  }
- }
+ 
   listCardsByUserId(userId: number) {
     this.paymentService.listByUserId(userId).subscribe(
       (response) => {

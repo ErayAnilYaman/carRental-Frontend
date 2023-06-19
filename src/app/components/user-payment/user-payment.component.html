@@ -1,0 +1,47 @@
+<div class="row mt-4" style="margin-left: 1%" *ngIf="dataLoaded">
+    <div
+      *ngFor="let pay of payments"
+      class="card mt-2 mr-2"
+      style="width: 18rem; margin-right: 10px"
+      
+    >
+      <div class="card-body">
+        <h4 class="cart-title">
+          {{ pay.userName }}
+        </h4>
+      </div>
+  
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <i><b>Kart Numarasi | </b></i>{{ pay.cardNumber }}
+        </li>
+        <li class="list-group-item">
+          <i><b>Cvc | </b></i>{{ pay.cvc }}
+        </li>
+        <li class="list-group-item">
+          <i><b>Tarih | </b></i>{{ pay.exDate }}
+        </li>
+        <li class="list-group-item">
+          <i
+            ><b
+              ><button
+                type="submit"
+                (click)="deleteById(pay.id)"
+                class="btn btn-danger"
+              >
+                Sil
+              </button></b
+            ></i
+          >
+          <button
+                type="submit"
+                (click)="update(pay.id)"
+                class="btn btn-warning"
+              >
+                Guncelle
+              </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

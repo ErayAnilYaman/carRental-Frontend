@@ -51,6 +51,7 @@ export class ProfileUpdateComponent implements OnInit {
       this.userService.update(updateModel).subscribe({next:(res)=>{
         
         this.toastr.success("Kullanici basariyla guncellendi!");
+        this.router.navigateByUrl("/profile/" + localStorage.getItem("User"));
       },error:(err)=>{
         
         this.toastr.error(err.error.message)

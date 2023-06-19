@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         },error:
         (responseErrorData) => {
           console.log(responseErrorData.error);
-          this.toastr.error("Ariza");
+          this.toastr.error("Kullanici bulunamadi");
         }}
       );
       

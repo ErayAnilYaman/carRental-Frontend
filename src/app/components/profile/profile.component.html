@@ -17,10 +17,8 @@
             <p class="text-muted mb-4" *ngIf="status">Aktif Kullanici</p>
 
             <div class="d-flex justify-content-center mb-2">
-              <button type="button" class="btn btn-primary">Follow</button>
-              <button type="button" class="btn btn-outline-primary ms-1">
-                Message
-              </button>
+              <button type="button" class="btn btn-primary" (click)="directCreditCardsPath()">Kredi Kartlarim</button>
+              
             </div>
             <div>
               <button type="button" class="btn btn-outline-warning" (click)="directUpdateUserRoute()">
