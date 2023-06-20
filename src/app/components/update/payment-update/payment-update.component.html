@@ -1,1 +1,72 @@
-<p>payment-update works!</p>
+<form [formGroup]="cardUpdateForm">
+    <div class="mb-3">
+      <label for="cardNumber" class="form-label">Kart numarası</label>
+      <input
+        type="text"
+        class="form-control"
+        id="cardNumber"
+        maxlength="16"
+        formControlName="cardNumber"
+        name="cardNumber"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="userName" class="form-label">Kart sahibi Adi</label>
+      <input
+        type="text"
+        class="form-control"
+        id="userName"
+        formControlName="username"
+        name="userName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="cvc" class="form-label">CVC</label>
+      <input
+        type="text"
+        class="form-control"
+        id="cvc"
+        maxlength="3"
+        name="cardCvc"
+        formControlName="cvc"
+      />
+    </div>
+    <div class="select-wrapper mb-3">Ay : 
+      <select class="form-label"  name="Ay" id="Ay" [(ngModel)]="exMonth" [ngModelOptions]="{standalone: true}">
+        <option disabled="disabled" value="" selected="selected" >Ay :</option>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+  
+      </select>
+    </div>
+    <div class="select-wrapper mb-3" >Yil :
+      <select name="Year" id="Year" class="form-label" [(ngModel)]="exYear" [ngModelOptions]="{standalone: true}">
+        <option disabled="disabled" value="" selected="selected"  >Yil :</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+        <option value="2029">2029</option>
+        <option value="2030">2030</option>
+        <option value="2031">2031</option>
+        <option value="2032">2032</option>
+        <option value="2033">2033</option>
+        <option value="2034">2034</option>
+  
+      </select>
+    </div>
+    
+    <button type="submit"  class="btn btn-warning" (click)="update()">Guncelle</button>
+  </form>

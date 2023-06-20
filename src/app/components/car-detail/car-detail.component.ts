@@ -32,7 +32,7 @@ export class CarDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toastrService: ToastrService,
     private cartItemService: CartItemService,
-    private router: Router
+    private router: Router,
   ) {}
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {

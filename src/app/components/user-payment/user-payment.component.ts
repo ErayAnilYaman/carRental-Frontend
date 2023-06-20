@@ -54,25 +54,7 @@ export class UserPaymentComponent implements OnInit {
     );
   }
   update(id: number) {
-    this.paymentService.getPayById(id).subscribe(
-      (res) => {
-        this.paymentToUpdate = res.data;
-      },
-      (err) => {
-        console.log(err);
-        console.log('Kredi Karti Bulunamadi');
-      }
-    );
-
-    this.paymentService.update(this.paymentToUpdate).subscribe(
-      (res) => {
-        console.log(res.message);
-      },
-      (err) => {
-        console.log(err);
-        console.log("Guncellenirken bir hata olustu!");
-      }
-    );
+    this.router.navigateByUrl("/payments/update/" + id);
   }
   checkUserSecurity(id: number) {
     if (id != this.userId) {

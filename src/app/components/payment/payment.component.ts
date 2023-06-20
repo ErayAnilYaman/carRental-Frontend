@@ -67,7 +67,7 @@ export class PaymentComponent implements OnInit {
   
   
   add() {
-    this.creditDate = this.exMonth + "/" + this.exYear[1];
+    this.creditDate = this.exMonth + "/" + this.exYear;
     console.log(this.creditDate);
     this.creditCardForm.controls['exDate'].setValue(this.creditDate);
     this.creditCardForm.controls['userId'].setValue(this.userId);
@@ -138,10 +138,25 @@ export class PaymentComponent implements OnInit {
       }
     );
   }
+  payCard(id:number){
+    // this.paymentService.getPayById(id).subscribe((res)=>{
+    //   this.selectedPayment = res.data;
+    // },(err)=>{
+    //   this.toastrService.error(err.message)
+    //   console.log(err);
+    // });
+    
+    this.selectedPayment = this.cardList.find(c=>c.id === id);
 
+    this.toastrService.success("Odeme Alindi","Odeme alinan kart numarasi :" +this.selectedPayment.cardNumber )
+    this.router.navigate([""]);
+  }
   getUserById() {
     this.userService.getUserById(this.userId).subscribe((response) => {
       this.selectedUser = response.data;
+    },(err)=>{
+      this.toastrService.error(err.message);
+      console.log(err);
     });
   }
 }
