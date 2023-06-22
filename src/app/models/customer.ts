@@ -3,4 +3,5 @@ export interface Customer{
     userId:number;
     companyName:string;
     companyMail:string;
+    address:string;
 }

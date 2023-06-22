@@ -46,6 +46,7 @@ export class CustomerAddComponent implements OnInit {
       userId:["",Validators.required],
       companyName:["",Validators.required],
       companyMail:["",Validators.required],
+      address:["",Validators.required],
     })
 
   }

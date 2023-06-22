@@ -53,6 +53,7 @@ export class CustomerUpdateComponent implements OnInit {
       customerId:['',Validators.required],
       companyName: ['', Validators.required],
       companyMail: ['', Validators.required],
+      address:["",Validators.required],
     });
   }
   getUserById(id:number){

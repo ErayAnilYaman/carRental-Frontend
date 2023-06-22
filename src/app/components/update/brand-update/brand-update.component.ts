@@ -62,7 +62,7 @@ export class BrandUpdateComponent implements OnInit {
   delete(brand:Brand) {
     this.brandService.delete(brand).subscribe((response) => {
       this.toastr.success(response.message, 'Başarılı');
-      
+      this.list();
     },(err)=>{
       console.log(err);
     });

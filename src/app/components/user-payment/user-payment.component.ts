@@ -47,8 +47,10 @@ export class UserPaymentComponent implements OnInit {
     this.paymentService.delete(id).subscribe(
       (res) => {
         console.log(res.message);
+        window.location.reload();
       },
       (err) => {
+        console.log(err);
         console.log(err.message);
       }
     );

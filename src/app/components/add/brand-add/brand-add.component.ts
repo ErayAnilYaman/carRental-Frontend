@@ -37,6 +37,7 @@ export class BrandAddComponent implements OnInit {
         (response) => {
           this.toastr.success('Urun Eklendi', response.message);
           console.log(response);
+          this.refreshItems();
         },
         (responseErrorData) => {
           console.log(responseErrorData);
