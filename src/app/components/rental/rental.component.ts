@@ -1,3 +1,4 @@
+import { CarImageAddComponent } from './../add/car-image-add/car-image-add.component';
 import { CarImageService } from './../../services/car-image.service';
 import { CarDetail } from './../../models/carDetail';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +12,12 @@ import { CartItemService } from 'src/app/services/cart-item.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { CarImage } from 'src/app/models/carImage';
+import { PaymentService } from 'src/app/services/payment.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { VatAddedPipe } from 'src/app/pipes/vat-added.pipe';
+import { CustomerService } from 'src/app/services/customer.service';
+import { Customer } from 'src/app/models/customer';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-rental',
@@ -18,22 +25,30 @@ import { CarImage } from 'src/app/models/carImage';
   styleUrls: ['./rental.component.css'],
 })
 export class RentalComponent implements OnInit {
+  userId: number = parseInt(localStorage.getItem('User'));
+  selectedCustomer: Customer;
+  rentDate: Date;
+  exYear: string;
+  exMonth: string;
+  rentalForm: FormGroup;
+  paymentForm: FormGroup;
   dataLoaded = false;
-  rentals: Rental[] ;
+  rentals: Rental[];
+  selectedRental:Rental;
   carsDetail: CarDetail[];
   price: number;
   car: CarDetail;
   currentRental: Rental;
-  currentUser: User[] ;
+  currentUser: User[];
   picksUpDate: string;
   returnsDate: string;
   pickUpDate: Date;
   returnDate: Date;
   itemLoaded: boolean = false;
-  imageList:CarImage[];
+  imageList: CarImage[];
   selectedCarImage: CarImage;
   baseUrl = 'https://localhost:44318/Uploads/Images/';
-
+  carId: number;
   constructor(
     private rentalService: RentalService,
     private activatedRoute: ActivatedRoute,
@@ -42,27 +57,50 @@ export class RentalComponent implements OnInit {
     private router: Router,
     private carItemService: CartItemService,
     private userService: UserService,
-    private carImageService:CarImageService,
+    private carImageService: CarImageService,
+    private paymentServive: PaymentService,
+    private formBuilder: FormBuilder,
+    private customerService: CustomerService
   ) {}
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
+        this.carId = params['carId'];
         this.itemLoaded = true;
         this.getRentalsByCarId(params['carId']);
         this.getCarDetailsByCarId(params['carId']);
-        this.getUserByCarId(params['carId']);
+        this.createRentalForm();
+        this.createPaymentForm();
+        this.getCustomerByUserId(this.userId);
       } else {
         this.itemLoaded = true;
         this.getRentals();
       }
     });
   }
-  getCarImageByCarId(id:number){
-    this.carImageService.getCarImagesByCarId(id).subscribe((res)=>{
-      this.imageList = res.data;
-    },(err)=>{
-      console.log(err);
-    })
+  consoleWrite() {
+    console.log('Retn Date');
+    console.log(this.rentDate);
+    console.log('yazdirldi');
+  }
+
+  createRentalForm() {
+    this.rentalForm = this.formBuilder.group({
+      carId: ['', Validators.required],
+      customerId: ['', Validators.required],
+      rentDate: ['', Validators.required],
+      returnDate: [''],
+    });
+  }
+  createPaymentForm() {
+    this.paymentForm = this.formBuilder.group({
+      userId: ['', Validators.required],
+      userName: ['', Validators.required],
+      cardNumber: ['', Validators.required],
+      cvc: ['', Validators.required],
+      exDate: ['', Validators.required],
+      status: [false, Validators.required],
+    });
   }
   getRentals() {
     this.rentalService.getAll().subscribe((response) => {
@@ -82,95 +120,75 @@ export class RentalComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
-  
-  getUserByCarId(carId: number) {
-    this.userService.getUserByCarId(carId).subscribe((response) => {
-      this.currentUser = response.data;
-      this.dataLoaded = true;
-    });
-  }
-  checkValuesAndGetPay(carId: number) {
-    this.rentalService.getRentalByCarId(carId).subscribe((response) => {
-      this.rentals = response.data;
-
-      if (this.rentals.length == 0) {
-        this.router.navigateByUrl('/payment/' + carId);
-      } else {
-        this.getCheckRental(carId);
+  getCustomerByUserId(id: number) {
+    this.customerService.getCustomerByUserId(id).subscribe(
+      (res) => {
+        this.selectedCustomer = res.data;
+        this.dataLoaded = true;
+      },
+      (err) => {
+        console.log(err);
       }
-    });
-  }
-  checkReturnDate() {
-    let diffInDays: number = this.calculateDayDiffrence(
-      this.returnsDate,
-      this.picksUpDate
     );
-    if (diffInDays < 0) {
-      this.returnDate = this.pickUpDate;
-      this.toastrService.error(
-        'Teslim tarihi kiralama tarihinden önce olamaz',
-        'HATA'
-      );
-      diffInDays = 1;
-    }
-    if (diffInDays == 0) {
-      diffInDays++;
-    }
-    this.priceCalculate(diffInDays);
   }
+  post() {
+    let exDate = this.exMonth + '/' + this.exYear;
+    this.paymentForm.controls['userId'].setValue(
+      parseInt(localStorage.getItem('User'))
+    );
+    console.log(exDate);
+    this.paymentForm.controls['exDate'].setValue(exDate);
+    this.rentalForm.controls['carId'].setValue(this.carId);
+    this.rentalForm.controls['customerId'].setValue(
+      this.selectedCustomer.customerId
+    );
+    console.log(this.rentalForm.controls['rentDate'].value);
+    console.log(this.rentalForm.controls['returnDate'].value);
 
-  getCheckRental(carId: number) {
-    if (this.rentals.values()) {
-      this.rentals.map((value) => {
-        const diff = this.calculateDayDiffrence(
-          value.returnDate
-            .toString()
-            .substring(0, value.returnDate.toString().length - 9),
-          this.picksUpDate
-        );
-        if (value.returnDate == null || diff > 0) {
-          this.toastrService.error('Bu araç şuan kiralamada', 'HATA');
-          this.router.navigateByUrl('/rental/' + carId);
-          return;
-        } else {
-          this.router.navigateByUrl('/payment/' + carId);
-        }
-      });
+    if (this.rentalForm.valid && this.paymentForm.valid) {
+      
+      this.postRental();
     } else {
-      this.toastrService.warning('Formu doldurunuz!');
+      this.toastrService.warning('Tum formlari doldurunuz!!');
     }
   }
-  calculateDayDiffrence(dateForReturn: string, dateForPickUp: string) {
-    
-    const dateForReturnMS = this.convertToMs(dateForReturn);
-    const dateForPickUpMS = this.convertToMs(dateForPickUp);
-    const diffInMilliseconds = dateForReturnMS - dateForPickUpMS;
-    return diffInMilliseconds / (1000 * 60 * 60 * 24);
+  checkStatusAndPostPayment() {
+    if (this.paymentForm.controls['status'].value === true) {
+      let paymentModel = Object.assign({}, this.paymentForm.value);
+      this.paymentServive.add(paymentModel).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          this.toastrService.error(err.message);
+          console.log(err);
+        }
+      );
+      
+    } else {
+      console.log('Kart kaydedilmeden islem yapiliyor...');
+      this.toastrService.success('Isleminiz yapiliyor....');
+      this.directMenu();
+    }
   }
-  priceCalculate(dayCount: number) {
-    this.carsDetail.map((t) => (this.price = dayCount * t.dailyPrice));
+  postRental() {
+    let rentalObject = Object.assign({}, this.rentalForm.value);
+    this.rentalService.add(rentalObject).subscribe(
+      (res) => {
+        console.log(res);
+        this.directMenu();
+        this.toastrService.success('Isleminiz basarili.');
+        this.toastrService.success('Kartiniz Kaydedildi.');
+        this.checkStatusAndPostPayment();
+      },
+      (err) => {
+        console.log(err);
+        this.toastrService.error(err.error.message)
+      }
+    );
   }
-
-  convertToMs(date: string): number {
-    const data = date.split('-');
-    const year = parseInt(data[0]);
-    const month = parseInt(data[1]);
-    const day = parseInt(data[2]);
-    return new Date(year, month, day).getTime();
+  
+  directMenu() {
+    this.router.navigateByUrl('/');
   }
-  // postRental(rental:Rental){
-  //   if (this.pickUpDate && this.returnDate) {
-  //     rental.brandName = this.carsDetail.find(c=>c.brandName).brandName
-  //     rental.userName = this.currentUser.find(c=>c.userName).userName;
-  //     rental.carId = this.carsDetail.find(c=>c.carId).carId
-  //     rental.rentDate = this.pickUpDate;
-  //     rental.returnDate = this.returnDate;
-  //     this.rentalService.addRental(rental);
-  //     this.toastrService.success("Islem basarili")
-  //   }
-  //   else{
-  //     this.toastrService.error("Hata!!")
-  //   }
-
-  // }
 }
