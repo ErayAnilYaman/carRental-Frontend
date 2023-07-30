@@ -5,11 +5,13 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/listResponseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import ResponseModel from '../models/responseModel';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
+  selectedCustomer: Customer;
   apiUrl = "https://localhost:44318/api/customers/"
   constructor(private httpClient:HttpClient) { }
   list():Observable<ListResponseModel<Customer>>{
@@ -37,7 +39,21 @@ export class CustomerService {
     let path = this.apiUrl + "delete";
     return this.httpClient.post<ResponseModel>(path,customer);
   }
-  
+  isCustomer():boolean{
+    let userId = parseInt(localStorage.getItem("User"));
+    this.getCustomerByUserId(userId).subscribe((res)=>{
+      this.selectedCustomer = res.data
+      console.log(this.selectedCustomer);
+      console.log(res);
+    },(err)=>{
+      console.error(err);
+    })
+    if (this.selectedCustomer !== null) {
+      return true;
+    }
+    return false;
+
+  }
 
 
 }

@@ -20,6 +20,15 @@
               <button type="button" class="btn btn-primary" (click)="directCreditCardsPath()">Kredi Kartlarim</button>
               
             </div>
+            <hr *ngIf="selectedCustomer !== null" />
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="changePasswordPath()"
+              *ngIf="selectedCustomer"
+            >
+              Sifreyi Degistir
+            </button>
             <div>
               <button type="button" class="btn btn-outline-warning" (click)="directUpdateUserRoute()">
                 Hesabi Guncelle
@@ -115,6 +124,7 @@
             >
               Sirket Hesabini Sil
             </button>
+            
             <hr />
             <div class="row">
               <div class="col-sm-3">

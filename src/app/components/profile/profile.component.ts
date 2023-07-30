@@ -51,9 +51,7 @@ export class ProfileComponent implements OnInit {
   verifiedProfile: Profile[];
   verifiedUser: User;
 
-  delete(){
-
-  }
+  
   verifyUserById(id: number) {
     this.userService.getUserById(id).subscribe({
       next: (response) => {
@@ -98,6 +96,7 @@ export class ProfileComponent implements OnInit {
           this.toastr.success('Kullanici basariyla silindi!');
           localStorage.removeItem("token");
           localStorage.removeItem("User");
+          window.location.reload();
         },
         (err) => {
           console.log(err);
@@ -148,5 +147,8 @@ export class ProfileComponent implements OnInit {
   }
   createCompanyAccount(id: number) {
     this.router.navigate(['/customers/add/' + id]);
+  }
+  changePasswordPath(){
+    this.router.navigateByUrl("profile/update-password/" + localStorage.getItem("User"));
   }
 }

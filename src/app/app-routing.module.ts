@@ -25,6 +25,8 @@ import { CustomerUpdateComponent } from './components/update/customer-update/cus
 import { ProfileUpdateComponent } from './components/update/profile-update/profile-update.component';
 import { UserPaymentComponent } from './components/user-payment/user-payment.component';
 import { PaymentUpdateComponent } from './components/update/payment-update/payment-update.component';
+import { CustomerGuard } from './guards/customer.guard';
+import { PasswordUpdateComponent } from './components/update/password-update/password-update.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full",component:CarComponent },
@@ -37,7 +39,7 @@ const routes: Routes = [
   {path:"cars/brand/:brandId",component:CarComponent},
   {path:"cardetails/:id",component:CarDetailComponent},
   {path:"cardetails",component:CarDetailComponent},
-  {path:"rentals/:carId",component:RentalComponent,canActivate:[LoginGuard]},
+  {path:"rentals/:carId",component:RentalComponent,canActivate:[CustomerGuard,LoginGuard]},
   {path:"payment/:carId",component:PaymentComponent,canActivate:[LoginGuard]},
   {path:"payments/:userId",component:UserPaymentComponent,canActivate:[LoginGuard]},
   {path:"cars/add",component:CarAddComponent,canActivate:[LoginGuard]},
@@ -52,10 +54,10 @@ const routes: Routes = [
   {path:"payments/update/:paymentId",component:PaymentUpdateComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
-  {path:"carimages/add",component:CarImageAddComponent,canActivate:[LoginGuard]},
   {path:"carimages/add/:carId",component:CarImageAddComponent,canActivate:[LoginGuard]},
   {path:"profile/:userId",component:ProfileComponent,canActivate:[LoginGuard]},
   {path:"profile/update/:userId",component:ProfileUpdateComponent,canActivate:[LoginGuard]},
+  {path:"profile/update-password/:userId",component:PasswordUpdateComponent,canActivate:[LoginGuard]},
 ];
 
 @NgModule({

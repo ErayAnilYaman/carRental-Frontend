@@ -37,6 +37,7 @@ import { CustomerUpdateComponent } from './components/update/customer-update/cus
 import { ProfileUpdateComponent } from './components/update/profile-update/profile-update.component';
 import { UserPaymentComponent } from './components/user-payment/user-payment.component';
 import { PaymentUpdateComponent } from './components/update/payment-update/payment-update.component';
+import { PasswordUpdateComponent } from './components/update/password-update/password-update.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { PaymentUpdateComponent } from './components/update/payment-update/payme
     ProfileUpdateComponent,
     UserPaymentComponent,
     PaymentUpdateComponent,
+    PasswordUpdateComponent,
   ],
   imports: [
     BrowserModule,

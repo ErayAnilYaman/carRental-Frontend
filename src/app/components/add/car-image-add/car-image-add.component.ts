@@ -1,11 +1,12 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpRequest } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
 import { CarImageService } from 'src/app/services/car-image.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterConfigOptions } from '@angular/router';
+import { CarImage } from 'src/app/models/carImage';
 import { CarService } from 'src/app/services/car.service';
 import { CarDetail } from 'src/app/models/carDetail';
-import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-car-image-add',
@@ -13,61 +14,91 @@ import { Car } from 'src/app/models/car';
   styleUrls: ['./car-image-add.component.css'],
 })
 export class CarImageAddComponent implements OnInit {
-  @ViewChild('fileUpload', { static: false }) fileUpload: ElementRef;
-  files: any = [];
+  carDetails : CarDetail[]
+  shortLink: string = '';
+  loading: boolean = false; // Flag variable
+  file: File = null; // Variable to store file
+  dataLoaded = false;
+  carImageGroup: FormGroup;
+  carId: number;
+  baseUrl = 'https://localhost:44318/uploads/images/';
+
+  // Inject service
   constructor(
+    private carImageService: CarImageService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService,
-    private imageService: CarImageService,
     private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService,
     private router: Router,
-    private carService: CarService
-  ) {}
+    private carServive:CarService,
+      ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['carId']) {
-        this.getCarDetailByCarId(params['carId']);
-        this.carId = params['carId'];
-      } else {
-        this.router.navigate(['cars']);
-        this.toastr.error('404 not found');
-      }
-    });
-  }
-  imagePathText: string;
-  carId: number;
-  car: Car;
-  selectedCar: CarDetail[];
-  imageForm: FormGroup;
-  createCarImageUploadForm() {
-    this.imageForm = this.formBuilder.group({
-      carId: this.carId,
-      imagePath: ['', Validators.required],
-    });
-  }
-  getCarDetailByCarId(carId: number) {
-    this.carService.getCarsByCarId(carId).subscribe((response) => {
-      this.car = response.data;
-    });
-  }
-  onFileSelect(event:any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.imageForm.get('profile').setValue(file);
-    }
-  }
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('file', this.imageForm.get('profile').value);
-
-    this.imageService.add(formData).subscribe(
-      (response) => {
-        console.log(response);
+    this.activatedRoute.params.subscribe(
+      (params) => {
+        if (params['carId']) {
+          this.carId = params['carId'];
+          this.getCarDetailsByCarId(params["carId"]);
+          this.createFileForm();
+          this.dataLoaded = true;
+        }
+        else{
+          this.toastr.warning("Araca erisilemedi");
+        }
       },
-      (error) => {
-        console.log(error);
+      (err) => {
+        this.toastr.error('Sayfa Bulunamadi');
+        this.router.navigate(['']);
       }
     );
+  }
+  getCarDetailsByCarId(carId:number){
+    this.carServive.getCarDetailsById(carId).subscribe((res)=>{
+      console.log(res);
+      this.carDetails = res.data;
+
+    },(err)=>{
+      console.log(err);
+    })
+  }
+  
+  createFileForm() {
+    this.carImageGroup = this.formBuilder.group({
+      imagePath: ['', Validators.required],
+      carId: ['', Validators.required],
+    });
+  }
+
+  onChange(event: any) {
+    this.file = event.target.files[0];
+  }
+
+  // OnClick of button Upload
+  onUpload() {
+    this.carImageGroup.controls['imagePath'].setValue(this.file.name);
+    this.carImageGroup.controls['carId'].setValue(this.carId);
+    if (this.carImageGroup.valid) {
+      var carImageModel = Object.assign({},this.carImageGroup.value);
+      this.loading = !this.loading;
+      console.log(this.file);
+      this.carImageService.upload(this.file,carImageModel).subscribe((event: any) => {
+        if (typeof event === 'object') {
+          // Short link via api response
+          this.shortLink = event.link;
+          this.loading = false; // Flag variable
+
+        }
+        console.log(event);
+      },(err)=>{
+        this.toastr.error(err.error.Message);
+        console.log(err);
+      });
+    } else {
+    
+      this.toastr.error('hata');
+    }
+  }
+  turnBackPage(){
+    this.router.navigate([""]);
   }
 }

@@ -44,4 +44,6 @@
       </ul>
     </div>
   </div>
-  
+  <div *ngIf="!dataLoaded" class="alert alert-warning" role="alert">
+    Hesabiniz ait kayitli kredi karti bulunmamaktadir.
+  </div>

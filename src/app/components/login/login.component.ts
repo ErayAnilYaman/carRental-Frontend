@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.createLoginFormModel();
+    
   }
 
   loginFormModel: FormGroup;
@@ -38,13 +39,13 @@ export class LoginComponent implements OnInit {
         (response) => {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('User', response.data.user);
-          this.toastr.success('Hosgeldiniz');
           this.router.navigate(["cars"]);
-          
-        },error:
-        (responseErrorData) => {
-          console.log(responseErrorData.error);
-          this.toastr.error("Kullanici bulunamadi");
+          this.toastr.success("Giris Yapildi");
+
+        },error:(err)=>{
+          this.toastr.error(err.error);
+          console.log(err);
+
         }}
       );
       

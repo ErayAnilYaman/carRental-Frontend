@@ -1,11 +1,83 @@
-<h1>Angular 15 FormData (multipart/data-form) Example</h1>
-<div>
-    <form [formGroup] = "imageForm" (ngSubmit)="onSubmit()">      
-      <div>
-        <input type="file" name="profile" (change)="onFileSelect($event)" />
+
+<div *ngIf="dataLoaded === true">
+    <div class="text-center">
+        <input class="form-control" type="file"
+                (change)="onChange($event)">
+    
+        <button (click)="onUpload()"
+            class="btn btn-success">
+            Upload
+        </button>
+    </div>
+    
+    <!-- Shareable short link of uploaded file -->
+    <div class="container text-center jumbotron"
+        *ngIf="shortLink">
+        <h2> Visit Here</h2>
+        <a href="{{shortLink}}">{{shortLink}}</a>
+    </div>
+    
+    <!--Flag variable is used here-->
+    <div class="container" *ngIf="loading">
+        <h3>Loading ...</h3>
+    </div>
+    
+</div>
+<div class="row mt-4" style="margin-left: 0%">
+    <div>
+      <button type="button" class="btn btn-primary" (click)="turnBackPage()">
+        Geri Dön
+      </button>
+    </div>
+    <div >
+      <div
+        class="card mt-2 mr-2"
+        style="width: 65rem; margin-right: 50px"
+        *ngFor="let carDetail of carDetails"
+      >
+        <img
+          *ngIf="carDetail.imagePath"
+          [src]="baseUrl + carDetail.imagePath"
+          class="card-img-top"
+          style="object-fit: cover"
+          width="100"
+          height="50%"
+        />
+  
+        <img
+          *ngIf="!carDetail.imagePath"
+          [src]="baseUrl + 'defaultCar.jpg'"
+          class="card-img-top"
+          style="object-fit: cover"
+          width="100"
+          height="50%"
+        />
+  
+        <div class="card-body">
+          <h4 class="cart-title">
+            {{ carDetail.description + " " + carDetail.modelYear }}
+          </h4>
+        </div>
+  
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <i><b>Renk | </b></i>{{ carDetail.colorName }}
+          </li>
+          <li class="list-group-item">
+            <i><b>Marka | </b></i>{{ carDetail.brandName }}
+          </li>
+          
+        </ul>
+  
+        <div class="card-body">
+          <div class="row">
+            
+            <br />
+            
+          </div>
+        </div>
       </div>
-      <div>
-        <button type="submit">Upload</button>
-      </div>
-    </form>
+    </div>
   </div>
+  

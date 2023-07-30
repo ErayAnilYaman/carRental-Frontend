@@ -2,7 +2,7 @@ import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType } from  '@angul
 import { Injectable } from '@angular/core';
 import { ListResponseModel } from '../models/listResponseModel';
 import { CarImage } from '../models/carImage';
-import { Observable } from 'rxjs';
+import { Observable, ObservableLike } from 'rxjs';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import ResponseModel from '../models/responseModel';
 import { map } from  'rxjs/operators';
@@ -29,10 +29,21 @@ export class CarImageService {
     return this.httpClient.post<ResponseModel>(path,formData,{
       reportProgress : true,
     });
+
   }
   list():Observable<ListResponseModel<CarImage>>{
     let path = this.apiUrl + "getall";
     return this.httpClient.get<ListResponseModel<CarImage>>(path);
+  }
+  upload(file:any,model:any):Observable<ResponseModel>{
+    let path = this.apiUrl + "add";
+
+    const formData = new FormData()
+    formData.append("ImagePath",model.imagePath);
+    formData.append("file",file);
+    formData.append("carId",model.carId);
+
+    return this.httpClient.post<ResponseModel>(path,formData);
   }
 
 }

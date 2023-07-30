@@ -31,4 +31,8 @@ export class RentalService {
     let addRentalPath = this.apiUrl + "add"
     return this.httpClient.post<ResponseModel>(addRentalPath,rental);
   }
+  getRentalById(id:number):Observable<SingleResponseModel<Rental>>{
+    let path = this.apiUrl + "getbyid?id=" + id;
+    return  this.httpClient.get<SingleResponseModel<Rental>>(path);
+  }
 }

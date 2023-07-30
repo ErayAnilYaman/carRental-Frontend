@@ -23,16 +23,8 @@
       <p class="card-text">
         Fiyatı {{ price | vatAdded : 18 | currency : "₺" }}
       </p>
-      <div class="form-group">
-        <label for="pickupDate">Kiralama Tarihi:</label>
-        <input
-          type="Date"
-          class="form-control"
-          id="pickupDate"
-          [(ngModel)]="picksUpDate"
-        />
-      </div>
-      <div class="form-group">
+      
+      <!-- <div class="form-group">
         <label for="returnDate">Teslim Tarihi:</label>
         <input
           type="Date"
@@ -43,14 +35,195 @@
         />
         <br />
       </div>
-    </div>
+    </div> -->
+    <form [formGroup]="rentalForm">
+      <div class="mb-3">
+        <label for="rentDate" class="form-label">Kiralama Tarihi</label>
+        <input
+          type="date"
+          class="form-control"
+          id="rentDate"
+          maxlength="16"
+          formControlName="rentDate"
+          name="rentDate"
+        />
+      </div>
+      <!-- <div class="select-wrapper mb-3" >Yil :
+        <select name="Year" id="Year" class="form-label" [(ngModel)]="exYear" [ngModelOptions]="{standalone: true}">
+          <option disabled="disabled" value="" selected="selected"  >Yil :</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+          <option value="2030">2030</option>
+          <option value="2031">2031</option>
+          <option value="2032">2032</option>
+          <option value="2033">2033</option>
+          <option value="2034">2034</option>
+    
+        </select>
+      </div>
+      <div class="select-wrapper mb-3">Ay : 
+        <select class="form-label"  name="Ay" id="Ay" [(ngModel)]="exMonth" [ngModelOptions]="{standalone: true}">
+          <option disabled="disabled" value="" selected="selected" >Ay :</option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+    
+        </select>
+      </div>
+      <div class="select-wrapper mb-3">Ay : 
+        <select class="form-label"  name="Ay" id="Ay" [(ngModel)]="exMonth" [ngModelOptions]="{standalone: true}">
+          <option disabled="disabled" value="" selected="selected" >Ay :</option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">12</option>
+          <option value="14">12</option>
+          <option value="15">12</option>
+          <option value="16">12</option>
+          <option value="17">12</option>
+          <option value="18">12</option>
+          <option value="19">12</option>
+          <option value="20">12</option>
+          <option value="21">12</option>
+          <option value="22">12</option>
+          <option value="23">12</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="23">23</option>
+          <option value="23">23</option>
+          <option value="23">23</option>
+          <option value="23">23</option>
 
-    <button
-      type="submit"
-      (click)="checkValuesAndGetPay(carDetail.carId)"
-      class="btn btn-primary"
-    >
-      Ödemeyi tamamla
+    
+        </select>
+      </div> -->
+      <div class="mb-3">
+        <label for="returnDate" class="form-label">Bitis Tarihi</label>
+        <input
+          type="date"
+          class="form-control"
+          id="returnDate"
+          formControlName="returnDate"
+          name="returnDate"
+        />
+      </div>
+      
+      
+      
+    </form>
+    <form [formGroup]="paymentForm">
+      <div class="mb-3">
+        <label for="cardNumber" class="form-label">Kart numarası</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cardNumber"
+          maxlength="16"
+          formControlName="cardNumber"
+          name="cardNumber"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="userName" class="form-label">Kart sahibi Adi</label>
+        <input
+          type="text"
+          class="form-control"
+          id="userName"
+          formControlName="userName"
+          name="userName"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="cvc" class="form-label">CVC</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cvc"
+          maxlength="3"
+          name="cardCvc"
+          formControlName="cvc"
+        />
+      </div>
+      <div class="select-wrapper mb-3">Ay : 
+        <select class="form-label"  name="Ay" id="Ay" [(ngModel)]="exMonth" [ngModelOptions]="{standalone: true}">
+          <option disabled="disabled" value="" selected="selected" >Ay :</option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+    
+        </select>
+      </div>
+      <div class="select-wrapper mb-3" >Yil :
+        <select name="Year" id="Year" class="form-label" [(ngModel)]="exYear" [ngModelOptions]="{standalone: true}">
+          <option disabled="disabled" value="" selected="selected"  >Yil :</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+          <option value="2030">2030</option>
+          <option value="2031">2031</option>
+          <option value="2032">2032</option>
+          <option value="2033">2033</option>
+          <option value="2034">2034</option>
+    
+        </select>
+      </div>
+      
+      
+      <div class="form-check form-check-reverse">
+        <input class="form-check-input" type="checkbox" value="" id="reverseCheck1"  formControlName="status">
+        <label class="form-check-label" for="reverseCheck1">
+          Karti Kaydet
+        </label>
+      </div>
+      
+    </form>
+   
+  </div>
+  <div>
+    <button (click)="post()">
+      Araci Kirala
     </button>
   </div>
 </div>

@@ -36,10 +36,18 @@ export class UserPaymentComponent implements OnInit {
     this.paymentService.listByUserId(this.userId).subscribe(
       (res) => {
         this.payments = res.data;
-        this.dataLoaded = true;
+        if (this.payments !== null) {
+          this.dataLoaded = true;
+          
+        }
+        else{
+          this.dataLoaded = false;
+        }
+        
       },
       (err) => {
         console.log(err);
+        this.dataLoaded = false;
       }
     );
   }
