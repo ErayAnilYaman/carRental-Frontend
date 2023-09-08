@@ -14,7 +14,7 @@ import ResponseModel from '../models/responseModel';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = "https://localhost:44318/api/auth/"
+  apiUrl = "https://localhost:7101/api/auth/"
   constructor(private httpClient:HttpClient) { }
 
 

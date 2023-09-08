@@ -10,7 +10,7 @@ import { SingleResponseModel } from '../models/singleResponseModel';
   providedIn: 'root'
 })
 export class ColorService {
-  apiUrl = "https://localhost:44318/api/colors/"
+  apiUrl = "https://localhost:7101/api/colors/"
   constructor(private httpClient:HttpClient) { }
 
 

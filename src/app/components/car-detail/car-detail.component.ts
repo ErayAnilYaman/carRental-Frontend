@@ -18,7 +18,7 @@ import { Rental } from 'src/app/models/rental';
 export class CarDetailComponent implements OnInit {
   carDetailList: CarDetail[];
   rentalList: Rental[];
-  baseUrl = 'https://localhost:44318/uploads/images/';
+  baseUrl = 'https://localhost:7101/uploads/images/';
   carDetail: CarDetail;
   dataLoaded = false;
   itemLoaded :boolean;

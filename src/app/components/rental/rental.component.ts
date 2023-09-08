@@ -47,7 +47,7 @@ export class RentalComponent implements OnInit {
   itemLoaded: boolean = false;
   imageList: CarImage[];
   selectedCarImage: CarImage;
-  baseUrl = 'https://localhost:44318/Uploads/Images/';
+  baseUrl = 'https://localhost:7101/Uploads/Images/';
   carId: number;
   constructor(
     private rentalService: RentalService,

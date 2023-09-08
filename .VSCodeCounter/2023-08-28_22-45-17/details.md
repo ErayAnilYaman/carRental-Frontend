@@ -1,0 +1,145 @@
+# Details
+
+Date : 2023-08-28 22:45:17
+
+Directory c:\\kamp-frontend\\carRental-Frontend
+
+Total : 130 files,  17859 codes, 133 comments, 508 blanks, all 18500 lines
+
+[Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
+
+## Files
+| filename | language | code | comment | blank | total |
+| :--- | :--- | ---: | ---: | ---: | ---: |
+| [README.md](/README.md) | Markdown | 14 | 0 | 14 | 28 |
+| [angular.json](/angular.json) | JSON | 110 | 0 | 1 | 111 |
+| [package-lock.json](/package-lock.json) | JSON | 12,441 | 0 | 1 | 12,442 |
+| [package.json](/package.json) | JSON | 45 | 0 | 0 | 45 |
+| [src/app/app-routing.module.ts](/src/app/app-routing.module.ts) | TypeScript | 65 | 0 | 3 | 68 |
+| [src/app/app.component.css](/src/app/app.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/app.component.html](/src/app/app.component.html) | HTML | 15 | 0 | 12 | 27 |
+| [src/app/app.component.spec.ts](/src/app/app.component.spec.ts) | TypeScript | 31 | 0 | 5 | 36 |
+| [src/app/app.component.ts](/src/app/app.component.ts) | TypeScript | 10 | 0 | 3 | 13 |
+| [src/app/app.module.ts](/src/app/app.module.ts) | TypeScript | 91 | 0 | 3 | 94 |
+| [src/app/components/add/brand-add/brand-add.component.css](/src/app/components/add/brand-add/brand-add.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/add/brand-add/brand-add.component.html](/src/app/components/add/brand-add/brand-add.component.html) | HTML | 57 | 0 | 1 | 58 |
+| [src/app/components/add/brand-add/brand-add.component.ts](/src/app/components/add/brand-add/brand-add.component.ts) | TypeScript | 62 | 0 | 2 | 64 |
+| [src/app/components/add/car-add/car-add.component.css](/src/app/components/add/car-add/car-add.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/add/car-add/car-add.component.html](/src/app/components/add/car-add/car-add.component.html) | HTML | 59 | 0 | 3 | 62 |
+| [src/app/components/add/car-add/car-add.component.ts](/src/app/components/add/car-add/car-add.component.ts) | TypeScript | 66 | 0 | 2 | 68 |
+| [src/app/components/add/car-image-add/car-image-add.component.css](/src/app/components/add/car-image-add/car-image-add.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/add/car-image-add/car-image-add.component.html](/src/app/components/add/car-image-add/car-image-add.component.html) | HTML | 67 | 2 | 14 | 83 |
+| [src/app/components/add/car-image-add/car-image-add.component.ts](/src/app/components/add/car-image-add/car-image-add.component.ts) | TypeScript | 92 | 3 | 10 | 105 |
+| [src/app/components/add/color-add/color-add.component.css](/src/app/components/add/color-add/color-add.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/add/color-add/color-add.component.html](/src/app/components/add/color-add/color-add.component.html) | HTML | 41 | 0 | 9 | 50 |
+| [src/app/components/add/color-add/color-add.component.ts](/src/app/components/add/color-add/color-add.component.ts) | TypeScript | 50 | 0 | 7 | 57 |
+| [src/app/components/add/customer-add/customer-add.component.css](/src/app/components/add/customer-add/customer-add.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/add/customer-add/customer-add.component.html](/src/app/components/add/customer-add/customer-add.component.html) | HTML | 93 | 0 | 4 | 97 |
+| [src/app/components/add/customer-add/customer-add.component.ts](/src/app/components/add/customer-add/customer-add.component.ts) | TypeScript | 92 | 0 | 5 | 97 |
+| [src/app/components/brand/brand.component.css](/src/app/components/brand/brand.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/brand/brand.component.html](/src/app/components/brand/brand.component.html) | HTML | 14 | 0 | 0 | 14 |
+| [src/app/components/brand/brand.component.ts](/src/app/components/brand/brand.component.ts) | TypeScript | 35 | 0 | 7 | 42 |
+| [src/app/components/car-detail/car-detail.component.css](/src/app/components/car-detail/car-detail.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/car-detail/car-detail.component.html](/src/app/components/car-detail/car-detail.component.html) | HTML | 77 | 0 | 5 | 82 |
+| [src/app/components/car-detail/car-detail.component.ts](/src/app/components/car-detail/car-detail.component.ts) | TypeScript | 97 | 0 | 13 | 110 |
+| [src/app/components/car/car.component.css](/src/app/components/car/car.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/car/car.component.html](/src/app/components/car/car.component.html) | HTML | 71 | 0 | 7 | 78 |
+| [src/app/components/car/car.component.ts](/src/app/components/car/car.component.ts) | TypeScript | 88 | 0 | 6 | 94 |
+| [src/app/components/cart-summary/cart-summary.component.css](/src/app/components/cart-summary/cart-summary.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/cart-summary/cart-summary.component.html](/src/app/components/cart-summary/cart-summary.component.html) | HTML | 22 | 0 | 0 | 22 |
+| [src/app/components/cart-summary/cart-summary.component.ts](/src/app/components/cart-summary/cart-summary.component.ts) | TypeScript | 31 | 0 | 4 | 35 |
+| [src/app/components/color/color.component.css](/src/app/components/color/color.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/color/color.component.html](/src/app/components/color/color.component.html) | HTML | 14 | 0 | 1 | 15 |
+| [src/app/components/color/color.component.spec.ts](/src/app/components/color/color.component.spec.ts) | TypeScript | 18 | 0 | 6 | 24 |
+| [src/app/components/color/color.component.ts](/src/app/components/color/color.component.ts) | TypeScript | 26 | 10 | 4 | 40 |
+| [src/app/components/customer/customer.component.css](/src/app/components/customer/customer.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/customer/customer.component.html](/src/app/components/customer/customer.component.html) | HTML | 17 | 0 | 0 | 17 |
+| [src/app/components/customer/customer.component.ts](/src/app/components/customer/customer.component.ts) | TypeScript | 23 | 0 | 3 | 26 |
+| [src/app/components/login/login.component.css](/src/app/components/login/login.component.css) | CSS | 90 | 0 | 13 | 103 |
+| [src/app/components/login/login.component.html](/src/app/components/login/login.component.html) | HTML | 138 | 0 | 5 | 143 |
+| [src/app/components/login/login.component.ts](/src/app/components/login/login.component.ts) | TypeScript | 54 | 0 | 13 | 67 |
+| [src/app/components/navi/navi.component.css](/src/app/components/navi/navi.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/navi/navi.component.html](/src/app/components/navi/navi.component.html) | HTML | 41 | 13 | 7 | 61 |
+| [src/app/components/navi/navi.component.ts](/src/app/components/navi/navi.component.ts) | TypeScript | 70 | 0 | 3 | 73 |
+| [src/app/components/payment/payment.component.css](/src/app/components/payment/payment.component.css) | CSS | 109 | 0 | 27 | 136 |
+| [src/app/components/payment/payment.component.html](/src/app/components/payment/payment.component.html) | HTML | 123 | 0 | 6 | 129 |
+| [src/app/components/payment/payment.component.ts](/src/app/components/payment/payment.component.ts) | TypeScript | 144 | 10 | 9 | 163 |
+| [src/app/components/profile/profile.component.css](/src/app/components/profile/profile.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/profile/profile.component.html](/src/app/components/profile/profile.component.html) | HTML | 279 | 0 | 4 | 283 |
+| [src/app/components/profile/profile.component.ts](/src/app/components/profile/profile.component.ts) | TypeScript | 146 | 0 | 9 | 155 |
+| [src/app/components/register/register.component.css](/src/app/components/register/register.component.css) | CSS | 90 | 0 | 13 | 103 |
+| [src/app/components/register/register.component.html](/src/app/components/register/register.component.html) | HTML | 147 | 0 | 5 | 152 |
+| [src/app/components/register/register.component.ts](/src/app/components/register/register.component.ts) | TypeScript | 51 | 0 | 2 | 53 |
+| [src/app/components/rental/rental.component.css](/src/app/components/rental/rental.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/rental/rental.component.html](/src/app/components/rental/rental.component.html) | HTML | 145 | 90 | 12 | 247 |
+| [src/app/components/rental/rental.component.ts](/src/app/components/rental/rental.component.ts) | TypeScript | 188 | 0 | 7 | 195 |
+| [src/app/components/update/brand-update/brand-update.component.css](/src/app/components/update/brand-update/brand-update.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/update/brand-update/brand-update.component.html](/src/app/components/update/brand-update/brand-update.component.html) | HTML | 82 | 0 | 6 | 88 |
+| [src/app/components/update/brand-update/brand-update.component.ts](/src/app/components/update/brand-update/brand-update.component.ts) | TypeScript | 64 | 0 | 7 | 71 |
+| [src/app/components/update/car-update/car-update.component.css](/src/app/components/update/car-update/car-update.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/update/car-update/car-update.component.html](/src/app/components/update/car-update/car-update.component.html) | HTML | 157 | 0 | 4 | 161 |
+| [src/app/components/update/car-update/car-update.component.ts](/src/app/components/update/car-update/car-update.component.ts) | TypeScript | 128 | 0 | 11 | 139 |
+| [src/app/components/update/color-update/color-update.component.css](/src/app/components/update/color-update/color-update.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/update/color-update/color-update.component.html](/src/app/components/update/color-update/color-update.component.html) | HTML | 88 | 0 | 2 | 90 |
+| [src/app/components/update/color-update/color-update.component.ts](/src/app/components/update/color-update/color-update.component.ts) | TypeScript | 80 | 0 | 13 | 93 |
+| [src/app/components/update/customer-update/customer-update.component.css](/src/app/components/update/customer-update/customer-update.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/update/customer-update/customer-update.component.html](/src/app/components/update/customer-update/customer-update.component.html) | HTML | 61 | 0 | 2 | 63 |
+| [src/app/components/update/customer-update/customer-update.component.ts](/src/app/components/update/customer-update/customer-update.component.ts) | TypeScript | 108 | 0 | 6 | 114 |
+| [src/app/components/update/password-update/password-update.component.css](/src/app/components/update/password-update/password-update.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/update/password-update/password-update.component.html](/src/app/components/update/password-update/password-update.component.html) | HTML | 42 | 0 | 5 | 47 |
+| [src/app/components/update/password-update/password-update.component.ts](/src/app/components/update/password-update/password-update.component.ts) | TypeScript | 47 | 0 | 8 | 55 |
+| [src/app/components/update/payment-update/payment-update.component.css](/src/app/components/update/payment-update/payment-update.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/update/payment-update/payment-update.component.html](/src/app/components/update/payment-update/payment-update.component.html) | HTML | 69 | 0 | 3 | 72 |
+| [src/app/components/update/payment-update/payment-update.component.ts](/src/app/components/update/payment-update/payment-update.component.ts) | TypeScript | 65 | 0 | 4 | 69 |
+| [src/app/components/update/profile-update/profile-update.component.css](/src/app/components/update/profile-update/profile-update.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/update/profile-update/profile-update.component.html](/src/app/components/update/profile-update/profile-update.component.html) | HTML | 69 | 0 | 2 | 71 |
+| [src/app/components/update/profile-update/profile-update.component.ts](/src/app/components/update/profile-update/profile-update.component.ts) | TypeScript | 71 | 0 | 6 | 77 |
+| [src/app/components/user-payment/user-payment.component.css](/src/app/components/user-payment/user-payment.component.css) | CSS | 0 | 0 | 1 | 1 |
+| [src/app/components/user-payment/user-payment.component.html](/src/app/components/user-payment/user-payment.component.html) | HTML | 47 | 0 | 2 | 49 |
+| [src/app/components/user-payment/user-payment.component.ts](/src/app/components/user-payment/user-payment.component.ts) | TypeScript | 74 | 0 | 5 | 79 |
+| [src/app/guards/customer.guard.ts](/src/app/guards/customer.guard.ts) | TypeScript | 22 | 0 | 5 | 27 |
+| [src/app/guards/login.guard.ts](/src/app/guards/login.guard.ts) | TypeScript | 22 | 0 | 5 | 27 |
+| [src/app/guards/user.guard.ts](/src/app/guards/user.guard.ts) | TypeScript | 13 | 0 | 3 | 16 |
+| [src/app/interceptors/auth.interceptor.ts](/src/app/interceptors/auth.interceptor.ts) | TypeScript | 23 | 0 | 4 | 27 |
+| [src/app/models/brand.ts](/src/app/models/brand.ts) | TypeScript | 4 | 0 | 0 | 4 |
+| [src/app/models/car.ts](/src/app/models/car.ts) | TypeScript | 8 | 0 | 2 | 10 |
+| [src/app/models/carDetail.ts](/src/app/models/carDetail.ts) | TypeScript | 11 | 0 | 0 | 11 |
+| [src/app/models/carImage.ts](/src/app/models/carImage.ts) | TypeScript | 6 | 0 | 0 | 6 |
+| [src/app/models/cartItem.ts](/src/app/models/cartItem.ts) | TypeScript | 6 | 0 | 1 | 7 |
+| [src/app/models/cartItems.ts](/src/app/models/cartItems.ts) | TypeScript | 2 | 0 | 1 | 3 |
+| [src/app/models/color.ts](/src/app/models/color.ts) | TypeScript | 4 | 0 | 0 | 4 |
+| [src/app/models/customer.ts](/src/app/models/customer.ts) | TypeScript | 7 | 0 | 0 | 7 |
+| [src/app/models/listResponseModel.ts](/src/app/models/listResponseModel.ts) | TypeScript | 4 | 0 | 1 | 5 |
+| [src/app/models/pay.ts](/src/app/models/pay.ts) | TypeScript | 9 | 0 | 0 | 9 |
+| [src/app/models/profile.ts](/src/app/models/profile.ts) | TypeScript | 10 | 0 | 1 | 11 |
+| [src/app/models/rental.ts](/src/app/models/rental.ts) | TypeScript | 6 | 0 | 0 | 6 |
+| [src/app/models/responseModel.ts](/src/app/models/responseModel.ts) | TypeScript | 4 | 0 | 0 | 4 |
+| [src/app/models/singleResponseModel.ts](/src/app/models/singleResponseModel.ts) | TypeScript | 4 | 0 | 1 | 5 |
+| [src/app/models/tokenModel.ts](/src/app/models/tokenModel.ts) | TypeScript | 5 | 0 | 0 | 5 |
+| [src/app/models/user.ts](/src/app/models/user.ts) | TypeScript | 7 | 0 | 0 | 7 |
+| [src/app/models/userForPasswordUpdate.ts](/src/app/models/userForPasswordUpdate.ts) | TypeScript | 5 | 0 | 0 | 5 |
+| [src/app/models/userForUpdate.ts](/src/app/models/userForUpdate.ts) | TypeScript | 7 | 0 | 0 | 7 |
+| [src/app/models/userToLogin.ts](/src/app/models/userToLogin.ts) | TypeScript | 4 | 0 | 0 | 4 |
+| [src/app/models/userToRegister.ts](/src/app/models/userToRegister.ts) | TypeScript | 6 | 0 | 0 | 6 |
+| [src/app/pipes/filter-brand-search.pipe.ts](/src/app/pipes/filter-brand-search.pipe.ts) | TypeScript | 13 | 0 | 7 | 20 |
+| [src/app/pipes/filter-car-search.pipe.ts](/src/app/pipes/filter-car-search.pipe.ts) | TypeScript | 13 | 0 | 7 | 20 |
+| [src/app/pipes/filter-color-search.pipe.ts](/src/app/pipes/filter-color-search.pipe.ts) | TypeScript | 14 | 0 | 6 | 20 |
+| [src/app/pipes/vat-added.pipe.ts](/src/app/pipes/vat-added.pipe.ts) | TypeScript | 10 | 0 | 5 | 15 |
+| [src/app/services/auth.service.ts](/src/app/services/auth.service.ts) | TypeScript | 34 | 0 | 5 | 39 |
+| [src/app/services/brand.service.ts](/src/app/services/brand.service.ts) | TypeScript | 34 | 0 | 4 | 38 |
+| [src/app/services/car-image.service.ts](/src/app/services/car-image.service.ts) | TypeScript | 42 | 0 | 8 | 50 |
+| [src/app/services/car.service.ts](/src/app/services/car.service.ts) | TypeScript | 54 | 1 | 6 | 61 |
+| [src/app/services/cart-item.service.ts](/src/app/services/cart-item.service.ts) | TypeScript | 42 | 0 | 4 | 46 |
+| [src/app/services/color.service.ts](/src/app/services/color.service.ts) | TypeScript | 37 | 0 | 7 | 44 |
+| [src/app/services/customer.service.ts](/src/app/services/customer.service.ts) | TypeScript | 54 | 0 | 6 | 60 |
+| [src/app/services/payment.service.ts](/src/app/services/payment.service.ts) | TypeScript | 34 | 0 | 3 | 37 |
+| [src/app/services/rental.service.ts](/src/app/services/rental.service.ts) | TypeScript | 34 | 0 | 5 | 39 |
+| [src/app/services/user.service.ts](/src/app/services/user.service.ts) | TypeScript | 61 | 0 | 4 | 65 |
+| [src/index.html](/src/index.html) | HTML | 16 | 0 | 1 | 17 |
+| [src/main.ts](/src/main.ts) | TypeScript | 4 | 0 | 3 | 7 |
+| [src/styles.css](/src/styles.css) | CSS | 3 | 1 | 1 | 5 |
+| [tsconfig.app.json](/tsconfig.app.json) | JSON | 13 | 1 | 1 | 15 |
+| [tsconfig.json](/tsconfig.json) | JSON with Comments | 34 | 1 | 1 | 36 |
+| [tsconfig.spec.json](/tsconfig.spec.json) | JSON | 13 | 1 | 1 | 15 |
+
+[Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)

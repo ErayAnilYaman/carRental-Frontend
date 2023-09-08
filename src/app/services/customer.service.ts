@@ -12,7 +12,7 @@ import { User } from '../models/user';
 })
 export class CustomerService {
   selectedCustomer: Customer;
-  apiUrl = "https://localhost:44318/api/customers/"
+  apiUrl = "https://localhost:7101/api/customers/"
   constructor(private httpClient:HttpClient) { }
   list():Observable<ListResponseModel<Customer>>{
     let path = this.apiUrl + "getall"

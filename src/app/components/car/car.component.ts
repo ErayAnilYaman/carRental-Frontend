@@ -19,7 +19,7 @@ export class CarComponent implements OnInit {
   carDetails: CarDetail[] = [];
   carImages: CarImage[] = [];
   imageOfPath: string;
-  baseUrl = 'https://localhost:44318/uploads/images/';
+  baseUrl = 'https://localhost:7101/uploads/images/';
 
   constructor(
     private carService: CarService,

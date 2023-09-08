@@ -1,6 +1,5 @@
 import { Time } from '@angular/common';
 import { Car } from '../../../models/car';
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -13,7 +12,6 @@ import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
-import { timeout, timer } from 'rxjs';
 
 @Component({
   selector: 'app-car-update',
@@ -65,8 +63,9 @@ export class CarUpdateComponent implements OnInit {
     this.setSelectedCarToUpdate(car);
     this.carService.deleteById(this.selectedCar.id).subscribe(
       (response) => {
+        this.refreshPage();
         this.toastrService.success(response.message, 'Başarılı');
-        this.refreshItems();
+        
       },
       (Error) => {
         console.log(Error);

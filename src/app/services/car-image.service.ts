@@ -13,7 +13,7 @@ import { Car } from '../models/car';
 })
 export class CarImageService {
   
-  apiUrl = "https://localhost:44318/api/carimages/"
+  apiUrl = "https://localhost:7101/api/carimages/"
   constructor(private httpClient:HttpClient) { }
 
   getCarImagesByCarId(id:number):Observable<ListResponseModel<CarImage>>{

@@ -15,7 +15,7 @@ import { UserForPasswordUpdate } from '../models/userForPasswordUpdate';
 export class UserService {
 
 
-  apiUrl = "https://localhost:44318/api/users/"
+  apiUrl = "https://localhost:7101/api/users/"
   constructor(private httpClient:HttpClient) { }
   getUserByCarId(carId:number):Observable<ListResponseModel<User>>{
     let getUserByCarIdPath = this.apiUrl + "getuserbycarid?id=" + carId

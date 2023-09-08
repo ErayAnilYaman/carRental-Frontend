@@ -11,7 +11,7 @@ import { SingleResponseModel } from '../models/singleResponseModel';
   providedIn: 'root'
 })
 export class CarService {
-  apiUrl = "https://localhost:44318/api/cars"
+  apiUrl = "https://localhost:7101/api/cars"
   
   constructor(private httpClient:HttpClient) { }
 

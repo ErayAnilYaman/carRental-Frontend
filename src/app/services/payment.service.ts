@@ -10,7 +10,7 @@ import { SingleResponseModel } from '../models/singleResponseModel';
   providedIn: 'root'
 })
 export class PaymentService  {
-  apiUrl = "https://localhost:44318/api/payment/"
+  apiUrl = "https://localhost:7101/api/payment/"
   constructor(private httpClient:HttpClient) { }
 
   add(payment:Pay):Observable<ResponseModel>{
